@@ -1,0 +1,33 @@
+{
+  "name": "sc-project",
+  "version": "1.0.0",
+  "description": "social coin web app using mern stack",
+  "main": "server.js",
+  "scripts": {
+    "start": "SET node backend/server.js",
+    "dev": "SET NODE_ENV=DEVELOPMENT& nodemon backend/server",
+    "prod": "SET NODE_ENV=PRODUCTION& nodemon backend/server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/webstellar/sc-project.git"
+  },
+  "keywords": [
+    "social",
+    "coin"
+  ],
+  "author": "Peter Onyegbule",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/webstellar/sc-project/issues"
+  },
+  "homepage": "https://github.com/webstellar/sc-project#readme",
+  "dependencies": {
+    "dotenv": "^16.0.1",
+    "express": "^4.18.1",
+    "mongoose": "^6.3.3"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.16"
+  }
+}
