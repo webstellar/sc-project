@@ -1,6 +1,8 @@
 //mongoose is used to connect Node app to MongoDB
 const mongoose = require("mongoose");
 
+//connect to mongodb
+
 const connectDatabase = () => {
   mongoose
     .connect(process.env.DB_LOCAL_URI, {
