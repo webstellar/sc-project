@@ -1,0 +1,26 @@
+[
+  {
+    "name": "Peter Onyegbule",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ultrices dui sapien eget mi.",
+    "profilePicture": [
+      {
+        "public_id": "",
+        "url": ""
+      }
+    ],
+    "gender": "Male",
+    "email": "pete.onyegbule@gmail.com"
+  },
+  {
+    "name": "Jennifer Onyegbule",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ultrices dui sapien eget mi.",
+    "profilePicture": [
+      {
+        "public_id": "",
+        "url": ""
+      }
+    ],
+    "gender": "Female",
+    "email": "jenniferajirioghene@gmail.com"
+  }
+]

@@ -16,7 +16,6 @@ const appreciationSchema = new mongoose.Schema({
   hero: {
     type: mongoose.Schema.ObjectId,
     ref: "Hero",
-    required: true,
   },
   audio: [
     {
