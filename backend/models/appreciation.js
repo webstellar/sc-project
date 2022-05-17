@@ -6,7 +6,7 @@ const appreciationSchema = new mongoose.Schema({
     type: String,
     required: [true, "Please provide a summary of your appreciation"],
     trim: true,
-    maxLength: [65, "Please sumary cannot exceed 65 characters"],
+    maxLength: [150, "Please sumary cannot exceed 65 characters"],
   },
   story: {
     type: String,

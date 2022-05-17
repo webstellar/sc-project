@@ -15,10 +15,12 @@ app.use(express.json());
 
 //Import All routes
 const appreciations = require("./routes/appreciation");
+const heroes = require("./routes/hero");
 
 //module we export and import into app, we can use via .use()
 //for appreciation which is a route, we get the url
 app.use("/api/v1", appreciations);
+app.use("/api/v1", heroes);
 
 //make the file usable by exposing them as additional properties
 //best practice to export your own module to have a cleaner workspace
