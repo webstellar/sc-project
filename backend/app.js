@@ -5,6 +5,9 @@
 const express = require("express");
 const app = express();
 
+//Middlewares
+const errorMiddleware = require("./middlewares/errors");
+
 //express.json() function will parse incoming requests with JSON payloads
 app.use(express.json());
 
@@ -21,6 +24,9 @@ const heroes = require("./routes/hero");
 //for appreciation which is a route, we get the url
 app.use("/api/v1", appreciations);
 app.use("/api/v1", heroes);
+
+//Middleware Usage
+app.use(errorMiddleware); //handle errors
 
 //make the file usable by exposing them as additional properties
 //best practice to export your own module to have a cleaner workspace
