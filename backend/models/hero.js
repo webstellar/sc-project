@@ -32,6 +32,11 @@ const heroSchema = new mongoose.Schema({
       values: ["Male", "Female", "Others"],
     },
   },
+
+  country: {
+    type: String,
+    required: true,
+  },
   email: {
     type: String,
     trim: true,
