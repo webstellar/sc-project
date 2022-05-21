@@ -42,10 +42,21 @@ const appreciationSchema = new mongoose.Schema({
       },
     },
   ],
+  tags: {
+    type: String,
+  },
+  likeCount: {
+    type: Number,
+    default: 0,
+  },
   yearOfAppreciation: Date,
   createdAt: {
     type: Date,
     default: Date.now,
+  },
+  creator: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
   },
 });
 

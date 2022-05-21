@@ -6,10 +6,8 @@ const APIFeatures = require("../utils/apiFeatures");
 
 //create new appreciation => /api/v1/appreciation/new
 exports.newAppreciation = catchAsyncErrors(async (req, res, next) => {
-  //get all the data from the body to create the new appreciation
   const appreciation = await Appreciation.create(req.body);
 
-  //201 means succesfully created
   res.status(201).json({
     success: true,
     appreciation,
@@ -87,3 +85,5 @@ exports.deleteAppreciation = catchAsyncErrors(async (req, res, next) => {
     message: "Appreciation has been succesfully deleted",
   });
 });
+
+//restapitutorial.com/httpstatuscodes.html
