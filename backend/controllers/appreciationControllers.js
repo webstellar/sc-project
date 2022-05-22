@@ -17,7 +17,7 @@ exports.newAppreciation = catchAsyncErrors(async (req, res, next) => {
 //Get all appreciations => /api/v1/appreciations
 exports.getAppreciations = catchAsyncErrors(async (req, res, next) => {
   const resPerPage = 4;
-  const appreciationCount = await Appreciation.countDocuments();
+  const appreciationsCount = await Appreciation.countDocuments();
 
   const apiFeatures = new APIFeatures(Appreciation.find(), req.query)
     .search()
@@ -27,8 +27,7 @@ exports.getAppreciations = catchAsyncErrors(async (req, res, next) => {
 
   res.status(200).json({
     success: true,
-    count: appreciations.length,
-    appreciationCount,
+    appreciationsCount,
     appreciations,
   });
 });

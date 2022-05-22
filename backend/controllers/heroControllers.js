@@ -17,7 +17,7 @@ exports.newHero = catchAsyncErrors(async (req, res, next) => {
 //Get All Heroes
 exports.getHeroes = catchAsyncErrors(async (req, res, next) => {
   const resPerPage = 4;
-  const heroCount = await Hero.countDocuments();
+  const heroesCount = await Hero.countDocuments();
 
   const apiFeatures = new APIFeatures(Hero.find(), req.query)
     .search()
@@ -28,7 +28,7 @@ exports.getHeroes = catchAsyncErrors(async (req, res, next) => {
   res.status(200).json({
     success: true,
     count: heroes.length,
-    heroCount,
+    heroesCount,
     heroes,
   });
 });
