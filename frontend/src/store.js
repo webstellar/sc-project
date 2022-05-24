@@ -1,12 +1,13 @@
 import { createStore, combineReducers, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
 import { composeWithDevTools } from "redux-devtools-extension";
-import { appreciationsReducer } from "./reducers/appreciationReducers";
+
 import { heroesReducer } from "./reducers/heroReducers";
+import { appreciationsReducer } from "./reducers/appreciationReducers";
 
 const reducer = combineReducers({
-  appreciations: appreciationsReducer,
   heroes: heroesReducer,
+  appreciations: appreciationsReducer,
 });
 
 let initiateState = {};

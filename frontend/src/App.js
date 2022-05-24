@@ -1,18 +1,18 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.css";
-import Header from "./components/layout/Header";
+import HeaderNav from "./components/layout/HeaderNav";
 import Home from "./components/pages/Home";
 import Discover from "./components/pages/Discover";
 import FAQs from "./components/pages/FAQs";
 import HelpCenter from "./components/pages/HelpCenter";
 import Donate from "./components/pages/Donate";
 import ContactUs from "./components/pages/ContactUs";
-import Footer from "./components/layout/Footer";
+import FooterNav from "./components/layout/FooterNav";
 
 function App() {
   return (
     <BrowserRouter>
-      <Header />
+      <HeaderNav />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="discover" element={<Discover />} />
@@ -21,7 +21,7 @@ function App() {
         <Route path="donate" element={<Donate />} />
         <Route path="contact-us" element={<ContactUs />} />
       </Routes>
-      <Footer />
+      <FooterNav />
     </BrowserRouter>
   );
 }

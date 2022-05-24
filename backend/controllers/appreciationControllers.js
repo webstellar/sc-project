@@ -23,11 +23,13 @@ exports.getAppreciations = catchAsyncErrors(async (req, res, next) => {
     .search()
     .filter()
     .pagination(resPerPage);
+
   const appreciations = await apiFeatures.query;
 
   res.status(200).json({
     success: true,
     appreciationsCount,
+    resPerPage,
     appreciations,
   });
 });

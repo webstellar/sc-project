@@ -23,18 +23,28 @@ exports.getHeroes = catchAsyncErrors(async (req, res, next) => {
     .search()
     .filter()
     .pagination(resPerPage);
+
+  /* apiFeatures = new APIFeatures(
+    Hero.find().populate("appreciations"),
+    req.query
+  )
+    .search()
+    .filter()
+    .pagination(resPerPage);
+    */
   const heroes = await apiFeatures.query;
 
   res.status(200).json({
     success: true,
-    count: heroes.length,
     heroesCount,
+    resPerPage,
     heroes,
   });
 });
 
 //Get a Single Hero
 exports.getSingleHero = catchAsyncErrors(async (req, res, next) => {
+  //const hero = await Hero.findById(req.params.id).populate("appreciations");
   const hero = await Hero.findById(req.params.id);
   //if not successful
   if (!hero) {
