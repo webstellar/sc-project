@@ -9,9 +9,9 @@
 
 const express = require("express");
 const app = express();
+const path = require("path");
 
 const bodyparser = require("body-parser");
-const cloudinary = require("cloudinary");
 
 //Middlewares
 const errorMiddleware = require("./middlewares/errors");
@@ -21,13 +21,6 @@ app.use(express.json());
 app.use(bodyparser.urlencoded({ extended: true }));
 //app.user(cookieParser())
 
-//Setting up cloudinary configuration
-cloudinary.config({
-  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
-  api_key: process.env.CLOUDINARY_API_KEY,
-  api_secret: process.env.CLOUDINARY_API_SECRET,
-});
-
 //Import All routes
 const appreciations = require("./routes/appreciation");
 const heroes = require("./routes/hero");
@@ -36,6 +29,14 @@ const heroes = require("./routes/hero");
 //for appreciation which is a route, we get the url
 app.use("/api/v1", appreciations);
 app.use("/api/v1", heroes);
+
+if (process.env.NODE_ENV === "PRODUCTION") {
+  app.use(express.static(path.join(__dirname, "../frontend/build")));
+
+  app.get("*", (req, res) => {
+    res.sendFile(path.resolve(__dirname, "../frontend/build/index.html"));
+  });
+}
 
 //Middleware Usage
 app.use(errorMiddleware); //handle errors
