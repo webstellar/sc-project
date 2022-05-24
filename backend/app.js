@@ -16,6 +16,9 @@ const bodyparser = require("body-parser");
 //Middlewares
 const errorMiddleware = require("./middlewares/errors");
 
+if (process.env.NODE_ENV !== "PRODUCTION")
+  require("dotenv").config({ path: "backend/config/config.env" });
+
 //express.json() function will parse incoming requests with JSON payloads
 app.use(express.json());
 app.use(bodyparser.urlencoded({ extended: true }));
