@@ -51,7 +51,7 @@ const Home = () => {
                       </Row>
                     </Card.Body>
 
-                    <Card.Title>{hero.appreciations[0].summary}</Card.Title>
+                    <Card.Title>{hero.appreciations.summary}</Card.Title>
                     <Card.Text>{hero.description}</Card.Text>
                     <Card.Text>Last updated 3 mins ago</Card.Text>
                   </Card.ImgOverlay>
