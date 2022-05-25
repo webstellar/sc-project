@@ -18,20 +18,22 @@ exports.newHero = catchAsyncErrors(async (req, res, next) => {
 exports.getHeroes = catchAsyncErrors(async (req, res, next) => {
   const resPerPage = 4;
   const heroesCount = await Hero.countDocuments();
-
+  /*
   const apiFeatures = new APIFeatures(Hero.find(), req.query)
     .search()
     .filter()
     .pagination(resPerPage);
 
-  /* apiFeatures = new APIFeatures(
+   */
+
+  apiFeatures = new APIFeatures(
     Hero.find().populate("appreciations"),
     req.query
   )
     .search()
     .filter()
     .pagination(resPerPage);
-    */
+
   const heroes = await apiFeatures.query;
 
   res.status(200).json({
@@ -44,8 +46,8 @@ exports.getHeroes = catchAsyncErrors(async (req, res, next) => {
 
 //Get a Single Hero
 exports.getSingleHero = catchAsyncErrors(async (req, res, next) => {
-  //const hero = await Hero.findById(req.params.id).populate("appreciations");
-  const hero = await Hero.findById(req.params.id);
+  const hero = await Hero.findById(req.params.id).populate("appreciations");
+  //const hero = await Hero.findById(req.params.id);
   //if not successful
   if (!hero) {
     return next(new ErrorHandler("Hero not found", 404));

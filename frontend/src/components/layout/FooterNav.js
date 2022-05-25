@@ -10,7 +10,6 @@ import {
 } from "react-icons/fa";
 import "./layout.css";
 
-
 const FooterNav = () => {
   return (
     <div className="footer-div mt-5">
@@ -84,7 +83,7 @@ const FooterNav = () => {
       </Navbar>
       <Navbar>
         <Container fluid="md">
-          <Nav className="justify-content-end">
+          <Nav className="d-flex justify-content-end">
             <Nav.Link className="footer-para mb-3">
               Copyright 2022 - Social coin
             </Nav.Link>

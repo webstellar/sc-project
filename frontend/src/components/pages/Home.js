@@ -1,9 +1,9 @@
 import React, { Fragment, useEffect } from "react";
 import MetaData from "../layout/MetaData";
 import { Card, Container, Row, Col } from "react-bootstrap";
+import { MdMessage } from "react-icons/md";
 
 import { useDispatch, useSelector } from "react-redux";
-import { getAppreciations } from "../../actions/appreciationActions";
 import { getHeroes } from "../../actions/heroActions";
 
 const Home = () => {
@@ -32,7 +32,7 @@ const Home = () => {
                 <Card
                   key={hero._id}
                   className="bg-dark text-white"
-                  style={{ width: "15rem" }}
+                  style={{ width: "15rem", borderRadius: "10px" }}
                 >
                   <Card.Img
                     style={{ width: "15rem", height: "20rem" }}
@@ -40,7 +40,18 @@ const Home = () => {
                     alt="Card image"
                   />
                   <Card.ImgOverlay>
-                    <Card.Title>{hero.name}</Card.Title>
+                    <Card.Body>
+                      <Row className="d-flex justify-content-end">
+                        <Col sm={3} className="hero-count">
+                          <span>
+                            <MdMessage />
+                          </span>
+                          <span className="ps-1">{hero.apprecationsCount}</span>
+                        </Col>
+                      </Row>
+                    </Card.Body>
+
+                    <Card.Title>{hero.appreciations[0].summary}</Card.Title>
                     <Card.Text>{hero.description}</Card.Text>
                     <Card.Text>Last updated 3 mins ago</Card.Text>
                   </Card.ImgOverlay>
