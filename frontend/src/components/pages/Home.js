@@ -1,7 +1,7 @@
 import React, { Fragment, useEffect } from "react";
 import MetaData from "../layout/MetaData";
-import { Card, Container, Row, Col } from "react-bootstrap";
-import { MdMessage } from "react-icons/md";
+import { Container, Row, Spinner } from "react-bootstrap";
+import Hero from "../heroes/hero/Hero";
 
 import { useDispatch, useSelector } from "react-redux";
 import { getHeroes } from "../../actions/heroActions";
@@ -22,45 +22,27 @@ const Home = () => {
   }, [dispatch]);
 
   return (
-    <>
-      <MetaData title={"Hero appreciation app"} />
-      <Container>
-        <Row md={4}>
-          {heroes &&
-            heroes.map((hero) => (
-              <Col>
-                <Card
-                  key={hero._id}
-                  className="bg-dark text-white"
-                  style={{ width: "15rem", borderRadius: "10px" }}
-                >
-                  <Card.Img
-                    style={{ width: "15rem", height: "20rem" }}
-                    src={hero.profilePicture.url}
-                    alt="Card image"
-                  />
-                  <Card.ImgOverlay>
-                    <Card.Body>
-                      <Row className="d-flex justify-content-end">
-                        <Col sm={3} className="hero-count">
-                          <span>
-                            <MdMessage />
-                          </span>
-                          <span className="ps-1">{hero.apprecationsCount}</span>
-                        </Col>
-                      </Row>
-                    </Card.Body>
-
-                    <Card.Title>{hero.appreciations.summary}</Card.Title>
-                    <Card.Text>{hero.description}</Card.Text>
-                    <Card.Text>Last updated 3 mins ago</Card.Text>
-                  </Card.ImgOverlay>
-                </Card>
-              </Col>
-            ))}
-        </Row>
-      </Container>
-    </>
+    <Fragment>
+      {loading ? (
+        <Fragment>
+          <Container className="text-center">
+            <Spinner animation="grow" size="sm" role="status" />
+            <Spinner animation="grow" size="sm" role="status" />
+            <Spinner animation="grow" size="sm" role="status" />
+          </Container>
+        </Fragment>
+      ) : (
+        <Fragment>
+          <MetaData title={"Hero appreciation app"} />
+          <Container>
+            <Row md={4}>
+              {heroes &&
+                heroes.map((hero) => <Hero key={hero._id} hero={hero} />)}
+            </Row>
+          </Container>
+        </Fragment>
+      )}
+    </Fragment>
   );
 };
 export default Home;

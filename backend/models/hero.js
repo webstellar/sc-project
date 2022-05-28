@@ -58,10 +58,37 @@ const heroSchema = new mongoose.Schema(
         ref: "Appreciation",
       },
     ],
+    linkedinUrl: {
+      type: String,
+      trim: true,
+      lowercase: true,
+      unique: true,
+    },
+    twitterUrl: {
+      type: String,
+      trim: true,
+      lowercase: true,
+      unique: true,
+    },
+    instagramUrl: {
+      type: String,
+      trim: true,
+      lowercase: true,
+      unique: true,
+    },
+    facebookUrl: {
+      type: String,
+      trim: true,
+      lowercase: true,
+      unique: true,
+    },
   },
   {
     timestamps: true,
   }
 );
+
+//remaining schemas
+//ability create new url
 
 module.exports = mongoose.model("Hero", heroSchema);

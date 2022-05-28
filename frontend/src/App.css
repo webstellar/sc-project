@@ -11,6 +11,12 @@
   color: #000 !important;
   background-color: #fff !important;
   border-radius: 10px !important;
-  padding: auto;
   font-size: 13px;
+}
+
+.card-bg-color {
+  margin-top: 5rem;
+  height: 9rem;
+  align-self: center;
+  background: rgba(0, 0, 0, 0.1);
 }

@@ -20,7 +20,10 @@ exports.getAppreciations = catchAsyncErrors(async (req, res, next) => {
   const resPerPage = 4;
   const appreciationsCount = await Appreciation.countDocuments();
 
-  const apiFeatures = new APIFeatures(Appreciation.find(), req.query)
+  const apiFeatures = new APIFeatures(
+    Appreciation.find({}).populate("hero"),
+    req.query
+  )
     .search()
     .filter()
     .pagination(resPerPage);

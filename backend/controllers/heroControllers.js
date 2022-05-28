@@ -1,4 +1,5 @@
 const Hero = require("../models/hero");
+const Appreciation = require("./models/appreciation");
 
 const ErrorHandler = require("../utils/errorHandler");
 const catchAsyncErrors = require("../middlewares/catchAsyncErrors");
@@ -16,7 +17,7 @@ exports.newHero = catchAsyncErrors(async (req, res, next) => {
 
 //Get All Heroes
 exports.getHeroes = catchAsyncErrors(async (req, res, next) => {
-  const resPerPage = 4;
+  const resPerPage = 8;
   const heroesCount = await Hero.countDocuments();
   /*
   const apiFeatures = new APIFeatures(Hero.find(), req.query)
@@ -27,7 +28,7 @@ exports.getHeroes = catchAsyncErrors(async (req, res, next) => {
    */
 
   apiFeatures = new APIFeatures(
-    Hero.find().populate("appreciations"),
+    Hero.find({}).populate("appreciations"),
     req.query
   )
     .search()
@@ -46,8 +47,8 @@ exports.getHeroes = catchAsyncErrors(async (req, res, next) => {
 
 //Get a Single Hero
 exports.getSingleHero = catchAsyncErrors(async (req, res, next) => {
-  const hero = await Hero.findById(req.params.id).populate("appreciations");
-  //const hero = await Hero.findById(req.params.id);
+  //const hero = await Hero.findById(req.params.id).populate("appreciations");
+  const hero = await Hero.findById(req.params.id);
   //if not successful
   if (!hero) {
     return next(new ErrorHandler("Hero not found", 404));
@@ -58,6 +59,25 @@ exports.getSingleHero = catchAsyncErrors(async (req, res, next) => {
     hero,
   });
 });
+
+//Associate Hero with Appreciation
+exports.associateHeroAppreciations = catchAsyncErrors(
+  async (req, res, next) => {
+    const hero = await Hero.findById(req.params.id);
+    const appreciation = await Appreciation.findById(req.params.id);
+
+    hero.appreciations.push(appreciation);
+    hero.save();
+    appreciation.hero.push(hero);
+    appreciation.save();
+
+    res.status(201).json({
+      success: true,
+      hero,
+      appreciation,
+    });
+  }
+);
 
 //Update a single Hero
 exports.updateHero = catchAsyncErrors(async (req, res, next) => {

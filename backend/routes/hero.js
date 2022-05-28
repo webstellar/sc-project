@@ -8,6 +8,7 @@ const {
   getSingleHero,
   updateHero,
   deleteHero,
+  associateHeroAppreciations,
 } = require("../controllers/heroControllers");
 
 //Get All Heroes
@@ -22,5 +23,8 @@ router.route("/admin/hero/:id").put(updateHero).delete(deleteHero);
 
 //Post a Hero to the DB
 router.route("/hero/new").post(newHero);
+
+//Post a Hero and Apprecation Association
+router.route("/hero/:id/:id").post(associateHeroAppreciations);
 
 module.exports = router;
