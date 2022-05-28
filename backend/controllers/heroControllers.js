@@ -1,5 +1,5 @@
 const Hero = require("../models/hero");
-const Appreciation = require("./models/appreciation");
+const Appreciation = require("../models/appreciation");
 
 const ErrorHandler = require("../utils/errorHandler");
 const catchAsyncErrors = require("../middlewares/catchAsyncErrors");
