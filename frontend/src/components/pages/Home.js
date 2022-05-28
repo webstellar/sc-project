@@ -9,9 +9,7 @@ import { getHeroes } from "../../actions/heroActions";
 const Home = () => {
   const dispatch = useDispatch();
 
-  /* const { loading, appreciations, error, appreciationsCount } = useSelector(
-    (state) => state.appreciations
-  ); */
+  //const { appreciations } = useSelector((state) => state.appreciations);
 
   const { loading, heroes, error, heroesCount } = useSelector(
     (state) => state.heroes

@@ -27,7 +27,7 @@ exports.getHeroes = catchAsyncErrors(async (req, res, next) => {
    */
 
   apiFeatures = new APIFeatures(
-    Hero.find({}).populate("appreciations"),
+    Hero.find().populate("appreciations"),
     req.query
   )
     .search()
@@ -46,8 +46,8 @@ exports.getHeroes = catchAsyncErrors(async (req, res, next) => {
 
 //Get a Single Hero
 exports.getSingleHero = catchAsyncErrors(async (req, res, next) => {
-  //const hero = await Hero.findById(req.params.id).populate("appreciations");
-  const hero = await Hero.findById(req.params.id);
+  const hero = await Hero.findById(req.params.id).populate("appreciations");
+  //const hero = await Hero.findById(req.params.id);
   //if not successful
   if (!hero) {
     return next(new ErrorHandler("Hero not found", 404));
@@ -67,7 +67,8 @@ exports.associateHeroAppreciations = catchAsyncErrors(
 
     hero.appreciations.push(appreciation);
     hero.save();
-    appreciation.hero.push(hero);
+
+    appreciation.hero = hero;
     appreciation.save();
 
     res.status(201).json({

@@ -54,7 +54,7 @@ const heroSchema = new mongoose.Schema(
     },
     appreciations: [
       {
-        type: mongoose.Schema.Types.ObjectId,
+        type: mongoose.Types.ObjectId,
         ref: "Appreciation",
       },
     ],

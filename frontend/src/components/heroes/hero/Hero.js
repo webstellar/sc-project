@@ -27,9 +27,9 @@ const Hero = ({ hero }) => {
                 </Col>
               </Row>
             </Card.Body>
-            <Card.Title>{hero.appreciations.summary}</Card.Title>
+            <Card.Title>{hero.appreciations[0].summary} </Card.Title>
             <div className="p-3 text-center card-bg-color">
-              {hero.description}
+              {hero.appreciations[0].summary}
             </div>
           </Card.ImgOverlay>
         </Card>
