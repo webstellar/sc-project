@@ -21,7 +21,7 @@ exports.getAppreciations = catchAsyncErrors(async (req, res, next) => {
   const appreciationsCount = await Appreciation.countDocuments();
 
   const apiFeatures = new APIFeatures(
-    Appreciation.find({}).populate("hero"),
+    Appreciation.find().populate("hero"),
     req.query
   )
     .search()

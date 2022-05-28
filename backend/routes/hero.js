@@ -25,6 +25,6 @@ router.route("/admin/hero/:id").put(updateHero).delete(deleteHero);
 router.route("/hero/new").post(newHero);
 
 //Post a Hero and Apprecation Association
-router.route("/hero/:id/:id").post(associateHeroAppreciations);
+router.route("/hero/:heroid/:appreciationid").post(associateHeroAppreciations);
 
 module.exports = router;

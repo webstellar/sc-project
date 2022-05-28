@@ -62,8 +62,8 @@ exports.getSingleHero = catchAsyncErrors(async (req, res, next) => {
 //Associate Hero with Appreciation
 exports.associateHeroAppreciations = catchAsyncErrors(
   async (req, res, next) => {
-    const hero = await Hero.findById(req.params.id);
-    const appreciation = await Appreciation.findById(req.params.id);
+    const hero = await Hero.findById(req.params.heroid);
+    const appreciation = await Appreciation.findById(req.params.appreciationid);
 
     hero.appreciations.push(appreciation);
     hero.save();
