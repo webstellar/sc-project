@@ -24,7 +24,6 @@ exports.getHeroes = catchAsyncErrors(async (req, res, next) => {
     .search()
     .filter()
     .pagination(resPerPage);
-
    */
 
   apiFeatures = new APIFeatures(
