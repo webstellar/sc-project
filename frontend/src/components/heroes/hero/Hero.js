@@ -27,7 +27,12 @@ const Hero = ({ hero }) => {
                 </Col>
               </Row>
             </Card.Body>
-            <Card.Title>{hero.appreciations[0].summary} </Card.Title>
+            {!hero.appreciations ? (
+              <Card.Title>{hero.description} </Card.Title>
+            ) : (
+              <Card.Title>{hero.appreciations[0].description} </Card.Title>
+            )}
+
             <div className="p-3 text-center card-bg-color">
               {hero.appreciations[0].summary}
             </div>

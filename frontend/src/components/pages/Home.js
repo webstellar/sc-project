@@ -2,6 +2,7 @@ import React, { Fragment, useEffect } from "react";
 import MetaData from "../layout/MetaData";
 import { Container, Row, Spinner } from "react-bootstrap";
 import Hero from "../heroes/hero/Hero";
+import ErrorBoundary from "../../ErrorBoundary";
 
 import { useDispatch, useSelector } from "react-redux";
 import { getHeroes } from "../../actions/heroActions";
@@ -34,8 +35,10 @@ const Home = () => {
           <MetaData title={"Hero appreciation app"} />
           <Container>
             <Row md={4}>
-              {heroes &&
-                heroes.map((hero) => <Hero key={hero._id} hero={hero} />)}
+              <ErrorBoundary>
+                {heroes &&
+                  heroes.map((hero) => <Hero key={hero._id} hero={hero} />)}
+              </ErrorBoundary>
             </Row>
           </Container>
         </Fragment>
