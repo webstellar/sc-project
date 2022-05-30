@@ -4,17 +4,27 @@ import { MdMessage } from "react-icons/md";
 import { Link } from "react-router-dom";
 
 const Hero = ({ hero }) => {
+  const appreciations = hero.appreciations;
+  let appr = appreciations[appreciations.length - 1];
   return (
     <Fragment>
       <Col as={Link} to={`/hero/${hero._id}`}>
         <Card
           className="bg-dark text-white"
-          style={{ width: "15rem", borderRadius: "10px" }}
+          style={{
+            width: "15rem",
+            height: "20rem",
+            borderRadius: "10px",
+          }}
         >
           <Card.Img
-            style={{ width: "15rem", height: "20rem" }}
             src={hero.profilePicture.url}
             alt="Card image"
+            style={{
+              width: "inherit",
+              height: "inherit",
+              borderRadius: "inherit",
+            }}
           />
           <Card.ImgOverlay>
             <Card.Body>
@@ -27,15 +37,7 @@ const Hero = ({ hero }) => {
                 </Col>
               </Row>
             </Card.Body>
-            {!hero.appreciations ? (
-              <Card.Title>{hero.description} </Card.Title>
-            ) : (
-              <Card.Title>{hero.appreciations[0].description} </Card.Title>
-            )}
-
-            <div className="p-3 text-center card-bg-color">
-              {hero.appreciations[0].summary}
-            </div>
+            <div className="p-3 text-center card-bg-color">{appr.summary}</div>
           </Card.ImgOverlay>
         </Card>
       </Col>

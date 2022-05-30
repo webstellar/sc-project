@@ -14,18 +14,16 @@ const heroSchema = new mongoose.Schema(
       required: [true, "Please provide a summary of Hero personality"],
       maxLength: [500, "Please summary cannot exceed 500 characters"],
     },
-    profilePicture: [
-      {
-        public_id: {
-          type: String,
-          required: true,
-        },
-        url: {
-          type: String,
-          required: true,
-        },
+    profilePicture: {
+      public_id: {
+        type: String,
+        required: true,
       },
-    ],
+      url: {
+        type: String,
+        required: true,
+      },
+    },
     gender: {
       type: String,
       required: [true, "Please select a gender type for your Hero"],

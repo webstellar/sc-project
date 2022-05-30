@@ -4,9 +4,16 @@ const Appreciation = require("../models/appreciation");
 const ErrorHandler = require("../utils/errorHandler");
 const catchAsyncErrors = require("../middlewares/catchAsyncErrors");
 const APIFeatures = require("../utils/apiFeatures");
+const cloudinary = require("cloudinary");
 
 //Create a new Hero
 exports.newHero = catchAsyncErrors(async (req, res, next) => {
+  const avatar = await cloudinary.v2.uploader.upload(req.body.profilePicture, {
+    folder: "social-coin/hero_avatars/",
+    width: 240,
+    crop: "scale",
+  });
+
   const hero = await Hero.create(req.body);
 
   res.status(201).json({

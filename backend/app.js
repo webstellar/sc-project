@@ -12,6 +12,7 @@ const app = express();
 const path = require("path");
 
 const bodyparser = require("body-parser");
+const cloudinary = require("cloudinary");
 
 //Middlewares
 const errorMiddleware = require("./middlewares/errors");
@@ -23,6 +24,13 @@ if (process.env.NODE_ENV !== "PRODUCTION")
 app.use(express.json());
 app.use(bodyparser.urlencoded({ extended: true }));
 //app.user(cookieParser())
+
+//Setting up cloudinary config
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+});
 
 //Import All routes
 const appreciations = require("./routes/appreciation");
