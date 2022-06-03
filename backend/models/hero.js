@@ -46,7 +46,7 @@ const heroSchema = new mongoose.Schema(
         "Please fill a valid email address",
       ],
     },
-    apprecationsCount: {
+    appreciationsCount: {
       type: Number,
       default: 0,
     },
