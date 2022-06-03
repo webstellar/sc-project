@@ -8,6 +8,7 @@ import HelpCenter from "./components/pages/HelpCenter";
 import Donate from "./components/pages/Donate";
 import ContactUs from "./components/pages/ContactUs";
 import FooterNav from "./components/layout/FooterNav";
+import HeroDetails from "./components/heroes/hero/HeroDetails";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
       <HeaderNav />
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/hero/:id" element={<HeroDetails />} />
         <Route path="discover" element={<Discover />} />
         <Route path="faqs" element={<FAQs />} />
         <Route path="helpcenter" element={<HelpCenter />} />

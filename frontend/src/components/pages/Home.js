@@ -1,7 +1,8 @@
 import React, { Fragment, useEffect } from "react";
 import MetaData from "../layout/MetaData";
-import { Container, Row, Spinner } from "react-bootstrap";
+import { Container, Row } from "react-bootstrap";
 import Hero from "../heroes/hero/Hero";
+import Loader from "../layout/Loader";
 import ErrorBoundary from "../../ErrorBoundary";
 
 import { useDispatch, useSelector } from "react-redux";
@@ -23,13 +24,7 @@ const Home = () => {
   return (
     <Fragment>
       {loading ? (
-        <Fragment>
-          <Container className="text-center">
-            <Spinner animation="grow" size="sm" role="status" />
-            <Spinner animation="grow" size="sm" role="status" />
-            <Spinner animation="grow" size="sm" role="status" />
-          </Container>
-        </Fragment>
+        <Loader />
       ) : (
         <Fragment>
           <MetaData title={"Hero appreciation app"} />
