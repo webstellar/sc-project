@@ -9,6 +9,7 @@ import Donate from "./components/pages/Donate";
 import ContactUs from "./components/pages/ContactUs";
 import FooterNav from "./components/layout/FooterNav";
 import HeroDetails from "./components/heroes/hero/HeroDetails";
+import AppreciationDetails from "./components/appreciations/AppreciationDetails";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/hero/:id" element={<HeroDetails />} />
+        <Route path="/appreciation/:id" element={<AppreciationDetails />} />
         <Route path="discover" element={<Discover />} />
         <Route path="faqs" element={<FAQs />} />
         <Route path="helpcenter" element={<HelpCenter />} />

@@ -3,12 +3,16 @@ import thunk from "redux-thunk";
 import { composeWithDevTools } from "redux-devtools-extension";
 
 import { heroesReducer, heroDetailsReducer } from "./reducers/heroReducers";
-import { appreciationsReducer } from "./reducers/appreciationReducers";
+import {
+  appreciationsReducer,
+  appreciationDetailsReducer,
+} from "./reducers/appreciationReducers";
 
 const reducer = combineReducers({
   heroes: heroesReducer,
   heroDetails: heroDetailsReducer,
   appreciations: appreciationsReducer,
+  appreciationDetails: appreciationDetailsReducer,
 });
 
 let initiateState = {};

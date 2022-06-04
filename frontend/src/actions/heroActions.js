@@ -28,7 +28,7 @@ export const getHeroes = () => async (dispatch) => {
   }
 };
 
-//Get all the heroes details from the backend
+//Get A single hero detail from the backend
 //use id as a parameter since dealing with one
 export const getHeroDetails = (id) => async (dispatch) => {
   try {

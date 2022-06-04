@@ -34,6 +34,7 @@ const heroSchema = new mongoose.Schema(
 
     country: {
       type: String,
+      default: "Nigeria",
     },
     email: {
       type: String,
