@@ -33,7 +33,7 @@ const Hero = ({ hero }) => {
                   <span>
                     <MdMessage />
                   </span>
-                  <span className="ps-1">{hero.apprecationsCount}</span>
+                  <span className="ps-1">{hero.appreciationsCount}</span>
                 </Col>
               </Row>
             </Card.Body>

@@ -18,6 +18,18 @@ const appreciationSchema = new mongoose.Schema(
       type: mongoose.Types.ObjectId,
       ref: "Hero",
     },
+    image: [
+      {
+        public_id: {
+          type: String,
+          required: true,
+        },
+        url: {
+          type: String,
+          required: true,
+        },
+      },
+    ],
     audio: [
       {
         public_id: {
