@@ -1,7 +1,6 @@
 import React, { Fragment } from "react";
 import { Link } from "react-router-dom";
 import { Navbar, Nav, Container, Button } from "react-bootstrap";
-import "./layout.css";
 
 const HeaderNav = () => {
   return (

@@ -8,7 +8,6 @@ import {
   FaInstagramSquare,
   FaFacebookSquare,
 } from "react-icons/fa";
-import "./layout.css";
 
 const FooterNav = () => {
   return (

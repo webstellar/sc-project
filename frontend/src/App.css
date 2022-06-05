@@ -1,5 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter&display=swap");
 
+/* Whole Website Styling*/
 * {
   font-family: "Inter", sans-serif;
   box-sizing: border-box;
@@ -7,6 +8,39 @@
   padding: 0;
 }
 
+/* Header and Footer Styling*/
+.header-button {
+  border-radius: 50px !important;
+  background-color: #000 !important;
+  padding-left: 2em !important;
+  padding-right: 2em !important;
+}
+
+.header-font {
+  color: #000 !important;
+  font-size: 1em !important;
+}
+
+.footer-div {
+  background: #e5e5e5;
+}
+
+.footer-icon {
+  color: #000000 !important;
+  font-size: 1.8rem;
+  cursor: pointer;
+}
+
+.footer-para {
+  color: #000;
+  font-size: 0.6em;
+}
+
+.footer-divider {
+  border-bottom: rgba(0, 0, 0, 0.11) 1px solid !important;
+}
+
+/* Hero and Appreciation Styling*/
 .hero-count {
   color: #000 !important;
   background-color: #fff !important;
@@ -44,4 +78,10 @@
 .form-control::placeholder {
   font-size: 0.95rem;
   color: #aaa;
+}
+
+.sc-appreciation-icon {
+  color: #00000080 !important;
+  font-size: 1.5rem;
+  cursor: pointer;
 }
