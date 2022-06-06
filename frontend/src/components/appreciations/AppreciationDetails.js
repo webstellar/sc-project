@@ -3,12 +3,17 @@ import { Container, Row, Col, Navbar, Image } from "react-bootstrap";
 import ErrorBoundary from "../../ErrorBoundary";
 import Loader from "../layout/Loader";
 import MetaData from "../../components/layout/MetaData";
-import { FaLinkedin, FaTwitter, FaInstagram, FaFacebook } from "react-icons/fa";
+import {
+  FaLinkedin,
+  FaTwitter,
+  FaInstagram,
+  FaFacebook,
+  FaLink,
+} from "react-icons/fa";
 import { BsThreeDots } from "react-icons/bs";
 import { Link } from "react-router-dom";
 import Banner from "../../images/banner-test.jpg";
-import HeroDetailsSideBar from "../heroes/hero/HeroDetailsSideBar";
-import AppreciationDetailsSideBar from "../appreciations/AppreciationDetailsSideBar";
+import AppreciationDetailsSideBar from "./AppreciationDetailsSideBar";
 
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -16,7 +21,6 @@ import {
   getAppreciationDetails,
   clearErrors,
 } from "../../actions/appreciationActions";
-import { getHeroDetails } from "../../actions/heroActions";
 
 const AppreciationDetails = () => {
   const { id } = useParams();
@@ -26,11 +30,8 @@ const AppreciationDetails = () => {
     (state) => state.appreciationDetails
   );
 
-  const { hero } = useSelector((state) => state.heroDetails);
-
   useEffect(() => {
     dispatch(getAppreciationDetails(id));
-    dispatch(getHeroDetails(id));
 
     if (error) {
       //alert.error(error);
@@ -74,6 +75,7 @@ const AppreciationDetails = () => {
                         <FaTwitter />
                         <FaInstagram />
                         <FaFacebook />
+                        <FaLink />
                         <BsThreeDots />
                       </div>
                     </Navbar.Collapse>
@@ -99,7 +101,7 @@ const AppreciationDetails = () => {
                   </div>
                 </Col>
                 <Col sm={4} className="ps-5">
-                  <HeroDetailsSideBar hero={hero} />
+                  <AppreciationDetailsSideBar />
                 </Col>
               </Row>
             </ErrorBoundary>

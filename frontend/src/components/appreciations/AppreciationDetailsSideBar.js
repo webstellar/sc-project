@@ -1,34 +1,44 @@
-import React, { Fragment } from "react";
+import React, { useEffect, Fragment } from "react";
 import SearchBar from "../layout/SearchBar";
 import { ReactComponent as Envelope } from "../../images/envelope-plus.svg";
+import HeroAppreciationLink from "../heroes/hero/HeroAppreciationLink";
 
-const AppreciationDetailsSideBar = (appreciation) => {
-  //Unable to connect to Appreciation Hero
-  //Solution pending
+import Loader from "../layout/Loader";
+import { useDispatch, useSelector } from "react-redux";
+import { getHeroes } from "../../actions/heroActions";
+
+const AppreciationDetailsSideBar = () => {
+  const dispatch = useDispatch();
+
+  const { loading, heroes, error } = useSelector((state) => state.heroes);
+
+  useEffect(() => {
+    dispatch(getHeroes());
+  }, [dispatch]);
+
   return (
     <Fragment>
       <SearchBar />
-      <img
-        src="https://github.com/mdo.png"
-        alt="mdo"
-        width="150"
-        height="150"
-        className="rounded-circle mb-3"
-      />
-      <h5 className="mt-0 fw-bold">{appreciation.hero}</h5>
-      <span className="mt-1 fw-bold pe-1">{appreciation.hero}</span>
-      {appreciation.hero > 0 ? (
-        <span className="mt-1 fw-bold">Appreciations</span>
+      {loading ? (
+        <Loader />
       ) : (
-        <span className="mt-1 fw-bold">Appreciation</span>
+        <Fragment>
+          <div className="mb-4">
+            {heroes.appreciations &&
+              heroes.appreciations.map((hero) => (
+                <HeroAppreciationLink key={hero._id} hero={hero} />
+              ))}
+          </div>
+        </Fragment>
       )}
-      <p className="mt-1 mb-4">{appreciation.hero}</p>
-      <button type="button" className="btn btn-dark rounded-pill px-3 me-3">
-        APPRECIATE
-      </button>
-      <span className="border border-2 border-dark text-dark rounded-circle p-2">
-        <Envelope />
-      </span>
+      <div>
+        <button type="button" className="btn btn-dark rounded-pill px-3 me-3">
+          APPRECIATE
+        </button>
+        <span className="border border-2 border-dark text-dark rounded-circle p-2">
+          <Envelope />
+        </span>
+      </div>
     </Fragment>
   );
 };
