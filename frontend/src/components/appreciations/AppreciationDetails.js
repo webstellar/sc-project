@@ -87,13 +87,15 @@ const AppreciationDetails = () => {
                     <div className="mb-4">
                       {!appreciation.image ? (
                         <Image
-                          src={`${appreciation.image}`}
                           style={{ width: "800px", height: "500px" }}
+                          className="img-fluid"
                         />
+
                       ) : (
                         <Image
                           src={Banner}
                           style={{ width: "800px", height: "500px" }}
+                          className="img-fluid"
                         />
                       )}
                     </div>
