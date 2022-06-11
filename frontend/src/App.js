@@ -17,8 +17,9 @@ function App() {
       <HeaderNav />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/hero/:id" element={<HeroDetails />} />
-        <Route path="/appreciation/:id" element={<AppreciationDetails />} />
+        <Route path="/search/:keyword/*" element={<Home />} />
+        <Route path="/hero/:id/*" element={<HeroDetails />} />
+        <Route path="/appreciation/:id/*" element={<AppreciationDetails />} />
         <Route path="discover" element={<Discover />} />
         <Route path="faqs" element={<FAQs />} />
         <Route path="helpcenter" element={<HelpCenter />} />

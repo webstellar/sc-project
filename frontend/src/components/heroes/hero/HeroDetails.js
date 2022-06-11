@@ -19,7 +19,7 @@ import {
 } from "../../../actions/heroActions";
 
 const HeroDetails = () => {
-  const { id } = useParams();
+  const params = useParams();
   const dispatch = useDispatch();
 
   const { loading, error, hero } = useSelector((state) => state.heroDetails);
@@ -27,14 +27,14 @@ const HeroDetails = () => {
   const { heroes } = useSelector((state) => state.heroes);
 
   useEffect(() => {
-    dispatch(getHeroDetails(id));
+    dispatch(getHeroDetails(params.id));
     dispatch(getHeroes());
 
     if (error) {
-      //alert.error(error);
+      alert.error(error);
       dispatch(clearErrors());
     }
-  }, [dispatch, error, id]);
+  }, [dispatch, error, params.id]);
 
   return (
     <Fragment>

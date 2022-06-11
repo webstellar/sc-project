@@ -1,13 +1,20 @@
 import React, { Fragment } from "react";
 import { ReactComponent as Envelope } from "../../../images/envelope-plus.svg";
 import SearchBar from "../../layout/SearchBar";
+import { Routes, Route } from "react-router-dom";
 
-const HeroDetailsSideBar = ({ hero, heroes }) => {
+const HeroDetailsSideBar = ({ hero }) => {
   return (
     <Fragment>
+      <Routes>
+        <Route
+          path="/"
+          render={({ history }) => <SearchBar history={history} />}
+        />
+      </Routes>
       <SearchBar />
       <img
-        src="https://github.com/mdo.png"
+        src={hero.profilePicture.url}
         alt="mdo"
         width="150"
         height="150"

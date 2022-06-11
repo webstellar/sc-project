@@ -1,23 +1,31 @@
 import React, { Fragment, useState } from "react";
 import { GrSearch } from "react-icons/gr";
 
-const SearchBar = () => {
+const SearchBar = ({ history }) => {
   const [keyword, setKeyword] = useState("");
 
   const searchHandler = (e) => {
     e.preventDefault();
+
+    if (keyword.trim()) {
+      history.push(`/search/${keyword}`);
+    } else {
+      history.push("/");
+    }
   };
+
+  //onSubmit={searchHandler} for the form
 
   return (
     <Fragment>
-      <form onSubmit={searchHandler} className="mb-lg-5">
+      <form className="mb-lg-5">
         <div className="input-group mb-4 border rounded-pill p-1">
           <div className="input-group-prepend border-0">
             <button
               id="button-addon4"
               type="button"
               className="btn btn-link text-info"
-              
+              onClick={searchHandler}
             >
               <GrSearch />
             </button>

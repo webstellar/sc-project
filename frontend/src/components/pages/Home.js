@@ -5,11 +5,13 @@ import Hero from "../heroes/hero/Hero";
 import Loader from "../layout/Loader";
 import ErrorBoundary from "../../ErrorBoundary";
 
+import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getHeroes } from "../../actions/heroActions";
 
 const Home = () => {
   const dispatch = useDispatch();
+  const params = useParams();
 
   //const { appreciations } = useSelector((state) => state.appreciations);
 
@@ -17,9 +19,15 @@ const Home = () => {
     (state) => state.heroes
   );
 
+  const keyword = params.keyword;
+
   useEffect(() => {
-    dispatch(getHeroes());
-  }, [dispatch]);
+    if (error) {
+      return alert.error(error);
+    }
+
+    dispatch(getHeroes(keyword));
+  }, [dispatch, keyword, error]);
 
   return (
     <Fragment>

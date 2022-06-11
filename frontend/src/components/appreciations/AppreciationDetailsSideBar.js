@@ -4,8 +4,9 @@ import { ReactComponent as Envelope } from "../../images/envelope-plus.svg";
 import HeroAppreciationLink from "../heroes/hero/HeroAppreciationLink";
 import { ListGroup } from "react-bootstrap";
 import { GoPrimitiveDot } from "react-icons/go";
-
 import Loader from "../layout/Loader";
+
+import { Routes, Route } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getHeroes } from "../../actions/heroActions";
 
@@ -20,7 +21,10 @@ const AppreciationDetailsSideBar = () => {
 
   return (
     <Fragment>
-      <SearchBar />
+      <Routes>
+        <Route render={({ history }) => <SearchBar history={history} />} />
+      </Routes>
+
       <div>
         <button type="button" className="btn btn-dark rounded-pill px-3 me-3">
           APPRECIATE
