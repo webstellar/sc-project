@@ -51,7 +51,7 @@ const AppreciationDetails = () => {
               <Row>
                 <Col sm={8} className="hero-details-col pe-5">
                   <Navbar className="justify-content-start mb-5">
-                    <Navbar.Brand href="#home">
+                    <Navbar.Brand as={Link} to="/">
                       <img
                         src="https://github.com/mdo.png"
                         alt="mdo"
@@ -90,7 +90,6 @@ const AppreciationDetails = () => {
                           style={{ width: "800px", height: "500px" }}
                           className="img-fluid"
                         />
-
                       ) : (
                         <Image
                           src={Banner}

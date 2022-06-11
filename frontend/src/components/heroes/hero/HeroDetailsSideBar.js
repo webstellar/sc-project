@@ -2,7 +2,7 @@ import React, { Fragment } from "react";
 import { ReactComponent as Envelope } from "../../../images/envelope-plus.svg";
 import SearchBar from "../../layout/SearchBar";
 
-const HeroDetailsSideBar = ({ hero }) => {
+const HeroDetailsSideBar = ({ hero, heroes }) => {
   return (
     <Fragment>
       <SearchBar />

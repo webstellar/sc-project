@@ -1,15 +1,22 @@
 import React, { Fragment, useEffect } from "react";
-import { Container, Row, Col, Tabs, Tab } from "react-bootstrap";
+import { Container, Row, Col, Tabs, Tab, ListGroup } from "react-bootstrap";
 import MetaData from "../../layout/MetaData";
 import ErrorBoundary from "../../../ErrorBoundary";
 import Appreciation from "./HeroDetailsAppreciation";
 import HeroDetailsSideBar from "./HeroDetailsSideBar";
 import HeroDetailsAbout from "./HeroDetailsAbout";
+import HeroAppreciationLink from "./HeroAppreciationLink";
 import Loader from "../../layout/Loader";
+import { GoPrimitiveDot } from "react-icons/go";
+//import InfiniteScroll from "react-infinite-scroll-component";
 
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getHeroDetails, clearErrors } from "../../../actions/heroActions";
+import {
+  getHeroDetails,
+  getHeroes,
+  clearErrors,
+} from "../../../actions/heroActions";
 
 const HeroDetails = () => {
   const { id } = useParams();
@@ -17,8 +24,11 @@ const HeroDetails = () => {
 
   const { loading, error, hero } = useSelector((state) => state.heroDetails);
 
+  const { heroes } = useSelector((state) => state.heroes);
+
   useEffect(() => {
     dispatch(getHeroDetails(id));
+    dispatch(getHeroes());
 
     if (error) {
       //alert.error(error);
@@ -64,6 +74,25 @@ const HeroDetails = () => {
 
                 <Col sm={4} className="ps-5">
                   <HeroDetailsSideBar hero={hero} />
+                  <ListGroup variant="flush" className="mb-4 mt-5">
+                    <span>
+                      <span
+                        style={
+                          heroes ? { color: "#4CAF50" } : { color: "#FF5252" }
+                        }
+                      >
+                        <GoPrimitiveDot />
+                      </span>
+                      See Who Got Appreciated Today
+                    </span>
+                    {heroes &&
+                      heroes.map((heroes, i) => (
+                        <HeroAppreciationLink
+                          key={i}
+                          heroes={heroes}
+                        ></HeroAppreciationLink>
+                      ))}
+                  </ListGroup>
                 </Col>
               </Row>
             </ErrorBoundary>

@@ -1,15 +1,34 @@
 import React, { Fragment } from "react";
 import { Link } from "react-router-dom";
+import { ListGroup, Navbar } from "react-bootstrap";
 
-const HeroAppreciationLink = ({ hero }) => {
+const HeroAppreciationLink = ({ heroes }) => {
+  const appreciations = heroes.appreciations;
+  let appr = appreciations[appreciations.length - 1];
+
   return (
     <Fragment>
-      <Link
-        to={`/appreciation/${hero._id}`}
-        className="text-decoration-none text-dark"
+      <ListGroup.Item
+        as={Link}
+        to={`/appreciation/${appr._id}`}
+        className="sc-sidedarlink mb-1"
       >
-        {hero.summary}
-      </Link>
+        <Navbar className="justify-content-start">
+          <Navbar.Brand>
+            <img
+              src="https://github.com/mdo.png"
+              alt="mdo"
+              width="24"
+              height="24"
+              className="rounded-circle me-2"
+            />
+            <span className="fw-bold" style={{ fontSize: "16px" }}>
+              {heroes.name}
+            </span>
+          </Navbar.Brand>
+        </Navbar>
+        {appr.summary}
+      </ListGroup.Item>
     </Fragment>
   );
 };

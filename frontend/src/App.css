@@ -85,3 +85,8 @@
   font-size: 1.5rem;
   cursor: pointer;
 }
+
+.sc-sidedarlink {
+  padding: 0 !important;
+  border: none !important;
+}
