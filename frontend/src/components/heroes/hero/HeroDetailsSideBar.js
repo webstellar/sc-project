@@ -7,7 +7,7 @@ const HeroDetailsSideBar = ({ hero, heroes }) => {
     <Fragment>
       <SearchBar />
       <img
-        src="https://github.com/mdo.png"
+        src={hero.profilePicture.url}
         alt="mdo"
         width="150"
         height="150"
