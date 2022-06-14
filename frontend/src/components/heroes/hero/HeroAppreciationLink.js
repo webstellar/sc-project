@@ -16,7 +16,7 @@ const HeroAppreciationLink = ({ heroes }) => {
         <Navbar className="justify-content-start">
           <Navbar.Brand>
             <img
-              src="https://github.com/mdo.png"
+              src={heroes.profilePicture.url}
               alt="mdo"
               width="24"
               height="24"

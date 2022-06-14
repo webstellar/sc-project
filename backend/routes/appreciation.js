@@ -10,20 +10,22 @@ const {
   deleteAppreciation,
 } = require("../controllers/appreciationControllers");
 
+const { isAuthenticatedUser, authorizeRoles } = require("../middlewares/auth");
+
 //GET Appreciation and link
 router.route("/appreciations").get(getAppreciations);
 
 //Get Single Appreciation and Link
 router.route("/appreciation/:id").get(getSingleAppreciation);
 
+//POST Appreciation and link***********************
+router.route("/user/appreciation/new").post(isAuthenticatedUser, newAppreciation);
+
 //Put Single Appreciation and Edit****************
 //Delete Single Appreciation
 router
-  .route("/admin/appreciation/:id")
-  .put(updateAppreciation)
-  .delete(deleteAppreciation);
-
-//POST Apprecation and link***********************
-router.route("/appreciation/new").post(newAppreciation);
+  .route("/user/appreciation/:id")
+  .put(isAuthenticatedUser, updateAppreciation)
+  .delete(isAuthenticatedUser, deleteAppreciation);
 
 module.exports = router;

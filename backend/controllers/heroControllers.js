@@ -8,10 +8,12 @@ const cloudinary = require("cloudinary");
 
 //Create a new Hero
 exports.newHero = catchAsyncErrors(async (req, res, next) => {
+  req.body.user = req.user.id;
+
   const avatar = await cloudinary.v2.uploader.upload(req.body.profilePicture, {
     folder: "social-coin/hero_avatars/",
     width: 240,
-    crop: "scale",
+    crop: "Fit",
   });
 
   const hero = await Hero.create(req.body);
@@ -69,6 +71,8 @@ exports.getSingleHero = catchAsyncErrors(async (req, res, next) => {
 //Associate Hero with Appreciation
 exports.associateHeroAppreciations = catchAsyncErrors(
   async (req, res, next) => {
+    req.body.user = req.user.id;
+
     const hero = await Hero.findById(req.params.heroid);
     const appreciation = await Appreciation.findById(req.params.appreciationid);
 
@@ -91,7 +95,7 @@ exports.updateHero = catchAsyncErrors(async (req, res, next) => {
   let hero = await Hero.findById(req.params.id);
 
   if (!hero) {
-    return next(new ErrorHandler("Hero not found", 404));
+    return next(new ErrorHandler("Unable to Update Hero", 404));
   }
 
   hero = await Hero.findByIdAndUpdate(req.params.id, req.body, {

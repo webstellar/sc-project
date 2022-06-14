@@ -13,7 +13,7 @@ import {
 import { BsThreeDots } from "react-icons/bs";
 import { Link } from "react-router-dom";
 import Banner from "../../images/banner-test.jpg";
-import AppreciationDetailsSideBar from "./AppreciationDetailsSideBar";
+import AppreciationDetailsSideBarBottom from "./AppreciationDetailsSideBarBottom";
 
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -102,7 +102,7 @@ const AppreciationDetails = () => {
                   </div>
                 </Col>
                 <Col sm={4} className="ps-5">
-                  <AppreciationDetailsSideBar />
+                  <AppreciationDetailsSideBarBottom />
                 </Col>
               </Row>
             </ErrorBoundary>

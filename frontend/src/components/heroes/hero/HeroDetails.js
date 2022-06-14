@@ -87,10 +87,7 @@ const HeroDetails = () => {
                     </span>
                     {heroes &&
                       heroes.map((heroes, i) => (
-                        <HeroAppreciationLink
-                          key={i}
-                          heroes={heroes}
-                        ></HeroAppreciationLink>
+                        <HeroAppreciationLink key={i} heroes={heroes} />
                       ))}
                   </ListGroup>
                 </Col>

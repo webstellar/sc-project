@@ -6,7 +6,8 @@ const APIFeatures = require("../utils/apiFeatures");
 
 //create new appreciation => /api/v1/appreciation/new
 exports.newAppreciation = catchAsyncErrors(async (req, res, next) => {
-  //req.body.hero = req.hero.id;
+  req.body.user = req.user.id;
+
   const appreciation = await Appreciation.create(req.body);
 
   res.status(201).json({

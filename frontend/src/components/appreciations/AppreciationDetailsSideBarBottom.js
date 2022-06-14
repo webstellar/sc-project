@@ -1,16 +1,15 @@
 import React, { useEffect, Fragment } from "react";
-import SearchBar from "../layout/SearchBar";
-import { ReactComponent as Envelope } from "../../images/envelope-plus.svg";
 import HeroAppreciationLink from "../heroes/hero/HeroAppreciationLink";
 import { ListGroup } from "react-bootstrap";
 import { GoPrimitiveDot } from "react-icons/go";
 import Loader from "../layout/Loader";
-
-import { Routes, Route } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getHeroes } from "../../actions/heroActions";
 
-const AppreciationDetailsSideBar = () => {
+import SearchBar from "../layout/SearchBar";
+import { ReactComponent as Envelope } from "../../images/envelope-plus.svg";
+
+const AppreciationDetailsSideBarBottom = () => {
   const dispatch = useDispatch();
 
   const { loading, heroes, error } = useSelector((state) => state.heroes);
@@ -21,10 +20,7 @@ const AppreciationDetailsSideBar = () => {
 
   return (
     <Fragment>
-      <Routes>
-        <Route render={({ history }) => <SearchBar history={history} />} />
-      </Routes>
-
+      <SearchBar />
       <div>
         <button type="button" className="btn btn-dark rounded-pill px-3 me-3">
           APPRECIATE
@@ -60,4 +56,4 @@ const AppreciationDetailsSideBar = () => {
   );
 };
 
-export default AppreciationDetailsSideBar;
+export default AppreciationDetailsSideBarBottom;

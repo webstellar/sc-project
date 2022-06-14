@@ -10,6 +10,7 @@ const {
   deleteHero,
   associateHeroAppreciations,
 } = require("../controllers/heroControllers");
+const { isAuthenticatedUser } = require("../middlewares/auth");
 
 //Get All Heroes
 router.route("/heroes").get(getHeroes);
@@ -17,14 +18,19 @@ router.route("/heroes").get(getHeroes);
 //Get A Single Hero
 router.route("/hero/:id").get(getSingleHero);
 
-//Put and Edit a Single Hero
-//Delete Single Hero
-router.route("/admin/hero/:id").put(updateHero).delete(deleteHero);
-
 //Post a Hero to the DB
-router.route("/hero/new").post(newHero);
+router.route("/user/hero/new").post(isAuthenticatedUser, newHero);
 
 //Post a Hero and Apprecation Association
-router.route("/hero/:heroid/:appreciationid").post(associateHeroAppreciations);
+router
+  .route("/hero/:heroid/:appreciationid")
+  .post(isAuthenticatedUser, associateHeroAppreciations);
+
+//Put and Edit a Single Hero
+//Delete Single Hero
+router
+  .route("/user/hero/:id")
+  .put(isAuthenticatedUser, updateHero)
+  .delete(isAuthenticatedUser, deleteHero);
 
 module.exports = router;

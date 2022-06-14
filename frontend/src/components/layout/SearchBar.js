@@ -18,14 +18,13 @@ const SearchBar = ({ history }) => {
 
   return (
     <Fragment>
-      <form className="mb-lg-5">
+      <form onSubmit={searchHandler} className="mb-lg-5">
         <div className="input-group mb-4 border rounded-pill p-1">
           <div className="input-group-prepend border-0">
             <button
               id="button-addon4"
               type="button"
               className="btn btn-link text-info"
-              onClick={searchHandler}
             >
               <GrSearch />
             </button>

@@ -7,10 +7,7 @@ const HeroDetailsSideBar = ({ hero }) => {
   return (
     <Fragment>
       <Routes>
-        <Route
-          path="/"
-          render={({ history }) => <SearchBar history={history} />}
-        />
+        <Route children={({ history }) => <SearchBar history={history} />} />
       </Routes>
       <SearchBar />
       <img

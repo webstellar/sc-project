@@ -12,48 +12,44 @@ const appreciationSchema = new mongoose.Schema(
     story: {
       type: String,
       required: [true, "Please write your appreciation"],
-      maxLength: [1000, "Please summary cannot exceed 1000 characters"],
+      maxLength: [3000, "Please summary cannot exceed 3000 characters"],
     },
     hero: {
       type: mongoose.Types.ObjectId,
       ref: "Hero",
+      required: true,
     },
-    image: [
-      {
-        public_id: {
-          type: String,
-          required: true,
-        },
-        url: {
-          type: String,
-          required: true,
-        },
+    user: {
+      type: mongoose.Schema.ObjectId,
+      ref: "User",
+      required: true,
+    },
+    image: {
+      public_id: {
+        type: String,
+        required: true,
       },
-    ],
-    audio: [
-      {
-        public_id: {
-          type: String,
-          required: true,
-        },
-        url: {
-          type: String,
-          required: true,
-        },
+      url: {
+        type: String,
+        required: true,
       },
-    ],
-    video: [
-      {
-        public_id: {
-          type: String,
-          required: true,
-        },
-        url: {
-          type: String,
-          required: true,
-        },
+    },
+    audio: {
+      public_id: {
+        type: String,
       },
-    ],
+      url: {
+        type: String,
+      },
+    },
+    video: {
+      public_id: {
+        type: String,
+      },
+      url: {
+        type: String,
+      },
+    },
     tags: {
       type: String,
     },
@@ -62,6 +58,11 @@ const appreciationSchema = new mongoose.Schema(
       default: 0,
     },
     yearOfAppreciation: Date,
+    user: {
+      type: mongoose.Schema.ObjectId,
+      ref: "User",
+      required: true,
+    },
     createdAt: {
       type: Date,
       default: Date.now,
