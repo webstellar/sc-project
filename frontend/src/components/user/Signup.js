@@ -110,7 +110,8 @@ const Signup = () => {
                           src={Google}
                           alt="linkedin icon"
                           style={{ width: 18, height: 18 }}
-                        />{" "}
+                          className="pe-1"
+                        />
                         sign up with Google
                       </Button>
                     </div>
@@ -120,7 +121,8 @@ const Signup = () => {
                           src={Linkedin}
                           alt="linkedin icon"
                           style={{ width: 18, height: 18 }}
-                        />{" "}
+                          className="pe-1"
+                        />
                         sign up with LinkedIn
                       </Button>
                     </div>

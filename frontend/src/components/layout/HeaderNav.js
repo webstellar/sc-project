@@ -25,7 +25,7 @@ const HeaderNav = () => {
               Sign in
             </Nav.Link>
             <Button
-              className="sc-disablefocus rounded-pill px-4 btn-dark btn-outline-light border-dark"
+              className="sc-disablefocus rounded-pill px-4 btn-dark btn-outline-light border-dark pt-2"
               variant="secondary"
               size="sm"
               as={Link}

@@ -12,7 +12,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { login, clearErrors } from "../../actions/userAction";
 
 const Login = () => {
-  const [email, setMail] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const alert = useAlert();
@@ -57,18 +57,30 @@ const Login = () => {
                   <div className="mt-5 sc-logincontrol">
                     <Form onSubmit={submitHandler}>
                       <Form.Group className="mb-3">
-                        <Form.Label>username/email address</Form.Label>
+                        <Form.Label htmlFor="email_field">
+                          email address
+                        </Form.Label>
                         <Form.Control
-                          type="text"
+                          type="email"
                           className="sc-disablefocus rounded-pill border-dark"
+                          value={email}
+                          onChange={(e) => {
+                            setEmail(e.target.value);
+                          }}
                         />
                       </Form.Group>
 
                       <Form.Group className="mb-3">
-                        <Form.Label>password</Form.Label>
+                        <Form.Label htmlFor="password_field">
+                          password
+                        </Form.Label>
                         <Form.Control
                           type="password"
                           className="sc-disablefocus rounded-pill border-dark"
+                          value={password}
+                          onChange={(e) => {
+                            setPassword(e.target.value);
+                          }}
                         />
                       </Form.Group>
                       <div class="d-grid gap-2">
@@ -76,9 +88,15 @@ const Login = () => {
                           type="submit"
                           className="rounded-pill btn-dark btn-outline-light border-dark mb-3"
                         >
-                          sign up
+                          sign in
                         </Button>
-                        <Form.Text className="">forgot password?</Form.Text>
+                        <Form.Text
+                          className="fw-bold text-dark text-decoration-none"
+                          as={Link}
+                          to="/password/forgot"
+                        >
+                          forgot password?
+                        </Form.Text>
                       </div>
                     </Form>
                     <div className="mt-5 mb-5">
@@ -91,20 +109,31 @@ const Login = () => {
                           src={Google}
                           alt="linkedin icon"
                           style={{ width: 18, height: 18 }}
-                        />{" "}
-                        sign up with Google
+                          className="pe-1"
+                        />
+                        sign in with Google
                       </Button>
                     </div>
-                    <div class="d-grid gap-2 mb-3">
-                      <Button className="sc-disablefocus rounded-pill btn-labeled btn-light btn-outline-dark">
-                        <img
-                          src={Linkedin}
-                          alt="linkedin icon"
-                          style={{ width: 18, height: 18 }}
-                        />{" "}
-                        sign up with LinkedIn
-                      </Button>
-                    </div>
+                    <Form>
+                      <div class="d-grid gap-2 mb-3">
+                        <Button className="sc-disablefocus rounded-pill btn-labeled btn-light btn-outline-dark mb-3">
+                          <img
+                            src={Linkedin}
+                            alt="linkedin icon"
+                            style={{ width: 18, height: 18 }}
+                            className="pe-1"
+                          />
+                          sign in with LinkedIn
+                        </Button>
+                        <Form.Text
+                          className="fw-bold text-dark text-decoration-none"
+                          as={Link}
+                          to="/register"
+                        >
+                          don't have an account? sign up here
+                        </Form.Text>
+                      </div>
+                    </Form>
                   </div>
                 </Col>
               </Row>
