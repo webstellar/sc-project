@@ -7,12 +7,14 @@ import {
   appreciationsReducer,
   appreciationDetailsReducer,
 } from "./reducers/appreciationReducers";
+import { authReducer } from "./reducers/userReducers";
 
 const reducer = combineReducers({
   heroes: heroesReducer,
   heroDetails: heroDetailsReducer,
   appreciations: appreciationsReducer,
   appreciationDetails: appreciationDetailsReducer,
+  auth: authReducer,
 });
 
 let initiateState = {};

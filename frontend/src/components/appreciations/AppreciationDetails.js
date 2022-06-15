@@ -85,8 +85,9 @@ const AppreciationDetails = () => {
                       {appreciation.summary}
                     </h1>
                     <div className="mb-4">
-                      {!appreciation.image ? (
+                      {appreciation.image?.url ? (
                         <Image
+                          src={appreciation.image?.url}
                           style={{ width: "800px", height: "500px" }}
                           className="img-fluid"
                         />

@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.css";
 import HeaderNav from "./components/layout/HeaderNav";
@@ -11,6 +11,8 @@ import ContactUs from "./components/pages/ContactUs";
 import FooterNav from "./components/layout/FooterNav";
 import HeroDetails from "./components/heroes/hero/HeroDetails";
 import AppreciationDetails from "./components/appreciations/AppreciationDetails";
+import Signup from "./components/user/Signup";
+import Login from "./components/user/Login";
 
 function App() {
   return (
@@ -21,11 +23,13 @@ function App() {
         <Route path="/search/:keyword/*" element={<Home />} />
         <Route path="/hero/:id/*" element={<HeroDetails />} />
         <Route path="/appreciation/:id/*" element={<AppreciationDetails />} />
-        <Route path="discover" element={<Discover />} />
-        <Route path="faqs" element={<FAQs />} />
-        <Route path="helpcenter" element={<HelpCenter />} />
-        <Route path="donate" element={<Donate />} />
-        <Route path="contact-us" element={<ContactUs />} />
+        <Route path="/register" element={<Signup />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/discover" element={<Discover />} />
+        <Route path="/faqs" element={<FAQs />} />
+        <Route path="/helpcenter" element={<HelpCenter />} />
+        <Route path="/donate" element={<Donate />} />
+        <Route path="/contact-us" element={<ContactUs />} />
       </Routes>
       <FooterNav />
     </BrowserRouter>

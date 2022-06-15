@@ -8,8 +8,10 @@ import ErrorBoundary from "../../ErrorBoundary";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getHeroes } from "../../actions/heroActions";
+import { useAlert } from "react-alert";
 
 const Home = () => {
+  const alert = useAlert();
   const dispatch = useDispatch();
   const params = useParams();
 
@@ -19,15 +21,15 @@ const Home = () => {
     (state) => state.heroes
   );
 
-  const keyword = params.keyword;
+  //const keyword = params.keyword;
 
   useEffect(() => {
     if (error) {
       return alert.error(error);
     }
 
-    dispatch(getHeroes(keyword));
-  }, [dispatch, keyword, error]);
+    dispatch(getHeroes());
+  }, [dispatch, alert, error]);
 
   return (
     <Fragment>

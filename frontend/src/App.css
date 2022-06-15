@@ -117,3 +117,27 @@
   outline: none;
   box-shadow: none;
 }
+
+.sc-logincontrol {
+  background-color: #fff;
+}
+
+/* h6 {
+  width: 100%;
+  text-align: center;
+  border-bottom: 1px solid #c4c4c4;
+  line-height: 1em;
+  margin: 10px 0 20px;
+}
+
+h6 span {
+  background: #fff;
+  padding: 0 10px;
+} */
+
+.sc-disablefocus:focus,
+.form-check-input:focus {
+  outline: none !important;
+  outline-offset: none !important;
+  box-shadow: none !important;
+}

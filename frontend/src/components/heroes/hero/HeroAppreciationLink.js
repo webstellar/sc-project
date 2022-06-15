@@ -16,18 +16,18 @@ const HeroAppreciationLink = ({ heroes }) => {
         <Navbar className="justify-content-start">
           <Navbar.Brand>
             <img
-              src={heroes.profilePicture.url}
+              src={heroes.profilePicture?.url}
               alt="mdo"
               width="24"
               height="24"
               className="rounded-circle me-2"
             />
             <span className="fw-bold" style={{ fontSize: "16px" }}>
-              {heroes.name}
+              {heroes?.name}
             </span>
           </Navbar.Brand>
         </Navbar>
-        {appr.summary}
+        {appr?.summary}
       </ListGroup.Item>
     </Fragment>
   );

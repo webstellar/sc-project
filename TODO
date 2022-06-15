@@ -1,12 +1,15 @@
 Pending Task for Backend
 Todo:
-  ☐ User Model
-  ☐ User Authenication
-  ☐ JWT Authenication and (Google and LinkedIn)
+  ✔ User Model @done(22-06-15 15:05)
+  ✔ User Authenication @done(22-06-15 15:05)
+  ✔ JWT Authenication @done(22-06-15 15:05)
+  ☐ Google and LinkedIn Login
   ☐ Reviews and Comments
+  ☐ Form for adding Hero
+  ☐ Form for adding Appreciations
   ☐ Admin Dashboard
   ☐ User Dashboard
-  ☐ Tabs Navigation for heroDetails.js (css)
+  ✔ Tabs Navigation for heroDetails.js (css) @done(22-06-15 15:05)
   ☐ Header Navigation button needs hover effect turned off
   ☐ Comprehensive about section for Hero like Verifying unclaimed accounts
   ☐ Get external API for commenting

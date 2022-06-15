@@ -14,17 +14,23 @@ const HeaderNav = () => {
               style={{ width: 200, height: 63 }}
             />
           </Navbar.Brand>
-          <Nav className="header-font justify-content-end ">
+          <Nav className="text-dark justify-content-end ">
             <Nav.Link as={Link} to="/our-story">
               Our story
             </Nav.Link>
             <Nav.Link as={Link} to="/discover">
               Discover
             </Nav.Link>
-            <Nav.Link as={Link} to="/sign-in">
+            <Nav.Link as={Link} to="/login">
               Sign in
             </Nav.Link>
-            <Button className="header-button" variant="secondary" size="sm">
+            <Button
+              className="sc-disablefocus rounded-pill px-4 btn-dark btn-outline-light border-dark"
+              variant="secondary"
+              size="sm"
+              as={Link}
+              to="/register"
+            >
               Get started
             </Button>
           </Nav>
