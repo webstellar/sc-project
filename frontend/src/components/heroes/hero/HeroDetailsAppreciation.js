@@ -11,7 +11,7 @@ const Appreciation = ({ appreciation }) => {
         as={Link}
         to={`/appreciation/${appreciation._id}`}
       >
-        <p>Jan 25, 2022</p>
+        <p>{String(appreciation.createdAt).substring(0, 10)}</p>
         <div className="mb-3">
           <div className="d-flex position-relative align-content-around">
             <div className="me-lg-5">

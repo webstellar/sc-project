@@ -13,6 +13,7 @@ import HeroDetails from "./components/heroes/hero/HeroDetails";
 import AppreciationDetails from "./components/appreciations/AppreciationDetails";
 import Register from "./components/user/Register";
 import Login from "./components/user/Login";
+import Profile from "./components/user/Profile";
 
 import { loadUser } from "./actions/userAction";
 import store from "./store";
@@ -32,6 +33,7 @@ function App() {
         <Route path="/appreciation/:id/*" element={<AppreciationDetails />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/profile" element={<Profile />} />
         <Route path="/discover" element={<Discover />} />
         <Route path="/faqs" element={<FAQs />} />
         <Route path="/helpcenter" element={<HelpCenter />} />

@@ -92,7 +92,11 @@ const LoggedIn = ({ user }) => {
               </span>
             </Col>
           </Row>
-          <Dropdown.Item as={Link} to="/" className="justify-content-around">
+          <Dropdown.Item
+            as={Link}
+            to="/profile"
+            className="justify-content-around"
+          >
             Profile Settings
           </Dropdown.Item>
           {user && user.role === "admin" && (
