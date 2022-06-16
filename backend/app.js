@@ -4,7 +4,7 @@ const path = require("path");
 
 const cookieParser = require("cookie-parser");
 const bodyparser = require("body-parser");
-const cloudinary = require("cloudinary");
+const fileUpload = require("express-fileupload");
 
 //Middlewares
 const errorMiddleware = require("./middlewares/errors");
@@ -14,15 +14,9 @@ if (process.env.NODE_ENV !== "PRODUCTION")
 
 //express.json() function will parse incoming requests with JSON payloads
 app.use(express.json());
-app.use(bodyparser.urlencoded({ extended: true }));
+app.use(bodyparser.urlencoded({ extended: true })); //cloudinary
 app.use(cookieParser());
-
-//Setting up cloudinary config
-cloudinary.config({
-  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
-  api_key: process.env.CLOUDINARY_API,
-  api_secret: process.env.CLOUDINARY_API_SECRET,
-});
+app.use(fileUpload());
 
 //Import All routes
 const appreciations = require("./routes/appreciation");

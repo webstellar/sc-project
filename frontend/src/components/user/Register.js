@@ -9,14 +9,24 @@ import { Container, Row, Col, Form, Button } from "react-bootstrap";
 import { useAlert } from "react-alert";
 import { Link, useParams, useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { login, clearErrors } from "../../actions/userAction";
+import { register, clearErrors } from "../../actions/userAction";
 
-const Signup = () => {
-  const [email, setMail] = useState("");
-  const [password, setPassword] = useState("");
+const Register = () => {
+  const [user, setUser] = useState({
+    name: "",
+    email: "",
+    password: "",
+  });
+
+  const { name, email, password } = user;
+
+  const [profilePicture, setProfilePicture] = useState("");
+  const [profilePicturePreview, setProfilePicturePreview] = useState(
+    "https://res.cloudinary.com/dja7mdaul/image/upload/v1655345210/social-coin/user_avatar/defaultProfile_ouwetk.jpg"
+  );
 
   const alert = useAlert();
-  const params = useParams();
+  //const params = useParams();
   const dispatch = useDispatch();
 
   const location = useLocation();
@@ -39,7 +49,31 @@ const Signup = () => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    dispatch(login(email, password));
+
+    const formData = new FormData();
+    formData.set("name", name);
+    formData.set("email", email);
+    formData.set("password", password);
+    formData.set("profilePicture", profilePicture);
+
+    dispatch(register(formData));
+  };
+
+  const onChange = (e) => {
+    if (e.target.name === "profilePicture") {
+      const reader = new FileReader();
+
+      reader.onload = () => {
+        if (reader.readyState === 2) {
+          setProfilePicturePreview(reader.result);
+          setProfilePicture(reader.result);
+        }
+      };
+
+      reader.readAsDataURL(e.target.files[0]);
+    } else {
+      setUser({ ...user, [e.target.name]: e.target.value });
+    }
   };
 
   return (
@@ -49,40 +83,89 @@ const Signup = () => {
       ) : (
         <Fragment>
           <ErrorBoundary>
-            <MetaData title={"Signup/Login"} />
+            <MetaData title={"Signup/Register"} />
             <Container>
               <Row className="justify-content-center">
                 <Col xs={6} md={4} className="mb-5">
                   <h2 className="pw-bolder text-center">sign up</h2>
                   <div className="mt-5 sc-logincontrol">
-                    <Form onSubmit={submitHandler}>
+                    <Form
+                      onSubmit={submitHandler}
+                      encType="multipart/form-data"
+                    >
                       <Form.Group className="mb-3">
-                        <Form.Label>username</Form.Label>
+                        <Form.Label htmlFor="fullname_field">
+                          full name
+                        </Form.Label>
                         <Form.Control
-                          type="text"
+                          type="name"
                           className="sc-disablefocus rounded-pill border-dark"
+                          name="name"
+                          value={name}
+                          onChange={onChange}
                         />
                       </Form.Group>
                       <Form.Group className="mb-3">
-                        <Form.Label>email address</Form.Label>
+                        <Form.Label htmlFor="email_field">
+                          email address
+                        </Form.Label>
                         <Form.Control
                           type="email"
                           className="sc-disablefocus rounded-pill border-dark"
+                          name="email"
+                          value={email}
+                          onChange={onChange}
                         />
                       </Form.Group>
                       <Form.Group className="mb-3">
-                        <Form.Label>password</Form.Label>
+                        <Form.Label htmlFor="password_field">
+                          password
+                        </Form.Label>
                         <Form.Control
                           type="password"
                           className="sc-disablefocus rounded-pill border-dark"
+                          name="password"
+                          value={password}
+                          onChange={onChange}
                         />
                       </Form.Group>
                       <Form.Group className="mb-3">
-                        <Form.Label>confirm password</Form.Label>
+                        <Form.Label htmlFor="password_field">
+                          confirm password
+                        </Form.Label>
                         <Form.Control
                           type="password"
                           className="sc-disablefocus rounded-pill border-dark"
+                          name="password"
+                          value={password}
+                          onChange={onChange}
                         />
+                      </Form.Group>
+                      <Form.Group className="mb-3">
+                        <Form.Label htmlFor="profilePicture_field">
+                          profile picture
+                        </Form.Label>
+                        <Row>
+                          <Col sm="2">
+                            <figure class="figure">
+                              <img
+                                src={profilePicturePreview}
+                                class="figure-img img-fluid rounded-circle"
+                                alt="profile preview"
+                                style={{ width: 30, height: 30 }}
+                              />
+                            </figure>
+                          </Col>
+                          <Col sm="10">
+                            <Form.Control
+                              type="file"
+                              className="sc-disablefocus rounded-pill border-dark"
+                              accept="images/*"
+                              name="profilePicture"
+                              onChange={onChange}
+                            />
+                          </Col>
+                        </Row>
                       </Form.Group>
                       <Form.Group className="mb-3">
                         <Form.Check
@@ -95,6 +178,7 @@ const Signup = () => {
                         <Button
                           type="submit"
                           className="rounded-pill btn-dark btn-outline-light border-dark"
+                          disabled={loading ? true : false}
                         >
                           sign up
                         </Button>
@@ -137,4 +221,4 @@ const Signup = () => {
   );
 };
 
-export default Signup;
+export default Register;

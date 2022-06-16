@@ -141,3 +141,47 @@ h6 span {
   outline-offset: none !important;
   box-shadow: none !important;
 }
+
+.sc-menudropdown .dropdown-toggle::after {
+  display: none;
+}
+
+.sc-menudropdown .dropdown-toggle:focus {
+  outline: none !important;
+  outline-offset: none !important;
+  box-shadow: none !important;
+}
+
+.sc-menudropdown .dropdown-toggle {
+  background: none;
+  border: none;
+  padding: none;
+  width: max-content;
+}
+
+.sc-menudropdown .dropdown-toggle:hover {
+  background: none;
+  border: none;
+}
+
+.sc-menudropdown .dropdown-toggle .btn-check:active + .btn-primary,
+.btn-check:checked + .btn-primary,
+.btn-primary.active,
+.btn-primary:active,
+.show > .btn-primary.dropdown-toggle {
+  background: none !important;
+  border: none !important;
+}
+
+.sc-menudropdown .dropdown-menu {
+  margin-top: 1em !important;
+  box-shadow: 0 3px 7px 0 rgba(0, 0, 0, 0.2), 0 5px 19px 0 rgba(0, 0, 0, 0.19);
+  border: none;
+  border-radius: 10px;
+  width: 15rem;
+  padding: 1rem
+}
+.sc-menudropdown .dropdown-menu .dropdown-item:hover {
+  background: none;
+  font-weight: bold;
+}

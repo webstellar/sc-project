@@ -16,7 +16,7 @@ const Login = () => {
   const [password, setPassword] = useState("");
 
   const alert = useAlert();
-  const params = useParams();
+  //const params = useParams();
   const dispatch = useDispatch();
 
   const location = useLocation();
@@ -49,7 +49,7 @@ const Login = () => {
       ) : (
         <Fragment>
           <ErrorBoundary>
-            <MetaData title={"Signup/Login"} />
+            <MetaData title={"Login"} />
             <Container>
               <Row className="justify-content-center">
                 <Col xs={6} md={4} className="mb-5">
