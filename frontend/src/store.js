@@ -7,14 +7,28 @@ import {
   appreciationsReducer,
   appreciationDetailsReducer,
 } from "./reducers/appreciationReducers";
-import { authReducer } from "./reducers/userReducers";
+import {
+  authReducer,
+  userReducer,
+  forgotPasswordReducer,
+  allUsersReducer,
+  userDetailsReducer,
+} from "./reducers/userReducers";
 
 const reducer = combineReducers({
   heroes: heroesReducer,
   heroDetails: heroDetailsReducer,
+  // newHero: newHeroReducer,
+  // hero: heroReducer,
+  // newAppreciation: newAppreciationReducer,
+  // appreciation: appreciationReducer,
   appreciations: appreciationsReducer,
   appreciationDetails: appreciationDetailsReducer,
   auth: authReducer,
+  user: userReducer,
+  allUsers: allUsersReducer,
+  userDetails: userDetailsReducer,
+  forgotPassword: forgotPasswordReducer,
 });
 
 let initiateState = {};

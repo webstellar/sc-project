@@ -143,7 +143,7 @@ h6 span {
 }
 
 .sc-menudropdown .dropdown-toggle::after {
-  display: none;
+  display: none !important;
 }
 
 .sc-menudropdown .dropdown-toggle:focus {
@@ -153,15 +153,15 @@ h6 span {
 }
 
 .sc-menudropdown .dropdown-toggle {
-  background: none;
-  border: none;
-  padding: none;
-  width: max-content;
+  background: none !important;
+  border: none !important;
+  padding: none !important;
+  width: max-content !important;
 }
 
 .sc-menudropdown .dropdown-toggle:hover {
-  background: none;
-  border: none;
+  background: none !important;
+  border: none !important;
 }
 
 .sc-menudropdown .dropdown-toggle .btn-check:active + .btn-primary,
@@ -179,7 +179,7 @@ h6 span {
   border: none;
   border-radius: 10px;
   width: 15rem;
-  padding: 1rem
+  padding: 1rem;
 }
 .sc-menudropdown .dropdown-menu .dropdown-item:hover {
   background: none;

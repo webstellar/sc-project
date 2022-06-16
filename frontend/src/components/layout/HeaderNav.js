@@ -4,7 +4,11 @@ import { Navbar, Nav, Container, Button } from "react-bootstrap";
 import NotLoggedIn from "./NotLoggedIn";
 import LoggedIn from "./LoggedIn";
 
+import { useSelector } from "react-redux";
+
 const HeaderNav = () => {
+  const { user, loading } = useSelector((state) => state.auth);
+
   return (
     <Fragment>
       <Navbar className="mb-5">
@@ -17,8 +21,7 @@ const HeaderNav = () => {
             />
           </Navbar.Brand>
           <Nav className="text-dark justify-content-end ">
-            <NotLoggedIn />
-            <LoggedIn />
+            {user ? <LoggedIn user={user} /> : !loading && <NotLoggedIn />}
           </Nav>
         </Container>
       </Navbar>

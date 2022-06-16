@@ -40,6 +40,7 @@ const Login = () => {
   const submitHandler = (e) => {
     e.preventDefault();
     dispatch(login(email, password));
+    alert.success("Logged in successfully.");
   };
 
   return (

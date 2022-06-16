@@ -1,7 +1,12 @@
-import React from "react";
+import React, { Fragment } from "react";
+import { Container } from "react-bootstrap";
 
 const Discover = () => {
-  return <div>Discover</div>;
+  return (
+    <Fragment>
+      <Container>Discover</Container>
+    </Fragment>
+  );
 };
 
 export default Discover;
