@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import ProtectedRoute from "./components/route/ProtectedRoute";
 import "./App.css";
 import HeaderNav from "./components/layout/HeaderNav";
 import Home from "./components/pages/Home";

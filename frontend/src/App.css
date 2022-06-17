@@ -185,3 +185,18 @@ h6 span {
   background: none;
   font-weight: bold;
 }
+
+.sc-listgroup.list-group {
+  border-radius: 10px !important;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.02), 0 3px 15px 0 rgba(0, 0, 0, 0.05) !important;
+}
+
+.sc-listgroup a.list-group-item:hover {
+  color: #000 !important;
+  font-weight: bold !important;
+}
+
+.sc-listgroup .list-group-item  {
+  padding-top: 1rem !important;
+  padding-bottom: 1rem !important;
+}
