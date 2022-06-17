@@ -1,14 +1,26 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useEffect } from "react";
+import Loader from "../layout/Loader";
+import HeroAppreciationLink from "../heroes/hero/HeroAppreciationLink";
 
+import { GoPrimitiveDot } from "react-icons/go";
 import { ListGroup, Col, Row, Container } from "react-bootstrap";
-import { useDispatch } from "react-redux";
-import { logout } from "../../actions/userAction";
+import { useDispatch, useSelector } from "react-redux";
 import { useAlert } from "react-alert";
 import { Link } from "react-router-dom";
+
+import { logout } from "../../actions/userAction";
+import { getHeroes } from "../../actions/heroActions";
 
 const ProfileTab = ({ user }) => {
   const alert = useAlert();
   const dispatch = useDispatch();
+
+  const { loading, heroes, error } = useSelector((state) => state.heroes);
+
+  useEffect(() => {
+    dispatch(getHeroes());
+  }, [dispatch, error]);
+
   const logoutHandler = () => {
     dispatch(logout());
     alert.success("Logged out successfully.");
@@ -80,18 +92,41 @@ const ProfileTab = ({ user }) => {
             </Row>
           </Col>
           <Col xs={6} md={3}>
-            <ListGroup className="sc-listgroup">
+            <ListGroup className="sc-listgroup mb-5">
               <ListGroup.Item as={Link} to="/me/update">
                 edit profile
               </ListGroup.Item>
               <ListGroup.Item as={Link} to="/password/update">
                 change password
               </ListGroup.Item>
+              <ListGroup.Item as={Link} to="/discover">
+                view all appreciations
+              </ListGroup.Item>
               <ListGroup.Item>make a donation</ListGroup.Item>
               <ListGroup.Item as={Link} to="/" onClick={logoutHandler}>
                 logout
               </ListGroup.Item>
             </ListGroup>
+
+            <Fragment>
+              <ListGroup variant="flush" className="mb-4 mt-4">
+                <span>
+                  <span
+                    style={heroes ? { color: "#4CAF50" } : { color: "#FF5252" }}
+                  >
+                    <GoPrimitiveDot />
+                  </span>
+                  See Who Got Appreciated Today
+                </span>
+                {heroes &&
+                  heroes.map((heroes, i) => (
+                    <HeroAppreciationLink
+                      key={i}
+                      heroes={heroes}
+                    ></HeroAppreciationLink>
+                  ))}
+              </ListGroup>
+            </Fragment>
           </Col>
         </Row>
       </Container>
