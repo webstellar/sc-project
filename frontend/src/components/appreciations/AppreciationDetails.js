@@ -65,7 +65,7 @@ const AppreciationDetails = () => {
                     </Navbar.Brand>
                     <Navbar.Brand>
                       <span className="fw-bold" style={{ fontSize: "18px" }}>
-                        {appreciation?.user ? appreciation?.user : "Admin"}
+                        {appreciation.user ? appreciation.user : "Admin"}
                       </span>
                       <span className="d-flex" style={{ fontSize: "12px" }}>
                         {apprDate}
@@ -88,9 +88,9 @@ const AppreciationDetails = () => {
                       {appreciation.summary}
                     </h1>
                     <div className="mb-4">
-                      {appreciation.image?.url ? (
+                      {appreciation.image.url ? (
                         <Image
-                          src={appreciation.image?.url}
+                          src={appreciation.image.url}
                           style={{ width: "800px", height: "500px" }}
                           className="img-fluid"
                         />
