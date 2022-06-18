@@ -5,14 +5,12 @@ import HeroAppreciationLink from "../heroes/hero/HeroAppreciationLink";
 import { GoPrimitiveDot } from "react-icons/go";
 import { ListGroup, Col, Row, Container } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { useAlert } from "react-alert";
 import { Link } from "react-router-dom";
 
 import { logout } from "../../actions/userAction";
 import { getHeroes } from "../../actions/heroActions";
 
 const ProfileTab = ({ user }) => {
-  const alert = useAlert();
   const dispatch = useDispatch();
 
   const { loading, heroes, error } = useSelector((state) => state.heroes);

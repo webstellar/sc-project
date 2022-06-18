@@ -16,8 +16,12 @@ exports.registerUser = catchAsyncErrors(async (req, res, next) => {
     crop: "scale",
   });
 
-  const { name, email, password } = req.body;
+  const { name, email, password, confirmPassword } = req.body;
 
+  //custom code
+  if (req.body.password !== req.body.confirmPassword) {
+    return next(new ErrorHandler("Password does not match", 400));
+  }
   const user = await User.create({
     name,
     email,
@@ -80,9 +84,11 @@ exports.forgotPassword = catchAsyncErrors(async (req, res, next) => {
   await user.save({ validateBeforeSave: false });
 
   // Create reset password url
-  const resetUrl = `${req.protocol}://${req.get(
+  /* const resetUrl = `${req.protocol}://${req.get(
     "host"
-  )}/api/v1/password/reset/${resetToken}`;
+  )}/api/v1/password/reset/${resetToken}`; */
+
+  const resetUrl = `${process.env.FRONTEND_URL}/password/reset/${resetToken}`;
 
   const message = `Your password reset token is as follow:\n\n${resetUrl}\n\nIf you have not requested this email, then ignore it.`;
 
@@ -182,23 +188,26 @@ exports.updateProfile = catchAsyncErrors(async (req, res, next) => {
   };
 
   // Update avatar
-  /* if (req.body.avatar !== "") {
+  if (req.body.profilePicture !== "") {
     const user = await User.findById(req.user.id);
 
-    const image_id = user.avatar.public_id;
+    const image_id = user.profilePicture.public_id;
     const res = await cloudinary.v2.uploader.destroy(image_id);
 
-    const result = await cloudinary.v2.uploader.upload(req.body.avatar, {
-      folder: "avatars",
-      width: 150,
-      crop: "scale",
-    });
+    const result = await cloudinary.v2.uploader.upload(
+      req.body.profilePicture,
+      {
+        folder: "social-coin/user_avatar",
+        width: 150,
+        crop: "scale",
+      }
+    );
 
-    newUserData.avatar = {
+    newUserData.profilePicture = {
       public_id: result.public_id,
       url: result.secure_url,
     };
-  } */
+  }
 
   const user = await User.findByIdAndUpdate(req.user.id, newUserData, {
     new: true,

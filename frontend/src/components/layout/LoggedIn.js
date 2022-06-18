@@ -1,18 +1,16 @@
 import React, { Fragment } from "react";
-import { Nav, Dropdown, Row, Col } from "react-bootstrap";
+import { Dropdown, Row, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { BsBell, BsChevronDown, BsArrowUpRight } from "react-icons/bs";
 import { useState } from "react";
 
 import { useDispatch } from "react-redux";
 import { logout } from "../../actions/userAction";
-import { useAlert } from "react-alert";
 
 const LoggedIn = ({ user }) => {
   //TODO: set State for Notification
   //TODO: Pull list of notifications
 
-  const alert = useAlert();
   const dispatch = useDispatch();
 
   const [notification, setNotification] = useState("unread messages");
@@ -92,11 +90,7 @@ const LoggedIn = ({ user }) => {
               </span>
             </Col>
           </Row>
-          <Dropdown.Item
-            as={Link}
-            to="/profile"
-            className="justify-content-around"
-          >
+          <Dropdown.Item as={Link} to="/me" className="justify-content-around">
             Profile Settings
           </Dropdown.Item>
           {user && user.role === "admin" && (

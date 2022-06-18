@@ -1,20 +1,20 @@
 import React, { Fragment, useState } from "react";
 import { GrSearch } from "react-icons/gr";
+import { useNavigate } from "react-router-dom";
 
-const SearchBar = ({ history }) => {
+const SearchBar = () => {
+  const navigate = useNavigate();
   const [keyword, setKeyword] = useState("");
 
   const searchHandler = (e) => {
     e.preventDefault();
 
     if (keyword.trim()) {
-      history.push(`/search/${keyword}`);
+      navigate(`/search/${keyword}`);
     } else {
-      history.push("/");
+      navigate("/");
     }
   };
-
-  //onSubmit={searchHandler} for the form
 
   return (
     <Fragment>
@@ -23,10 +23,10 @@ const SearchBar = ({ history }) => {
           <div className="input-group-prepend border-0">
             <button
               id="button-addon4"
-              type="button"
+              type="submit"
               className="btn btn-link text-info"
             >
-              <GrSearch />
+              <GrSearch className="sc-searchbar" />
             </button>
           </div>
           <input

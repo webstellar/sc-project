@@ -2,9 +2,6 @@ import React, { Fragment } from "react";
 import SearchBar from "../layout/SearchBar";
 import { ReactComponent as Envelope } from "../../images/envelope-plus.svg";
 
-import { useParams } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-
 const AppreciationDetailsSideBarsTop = ({ hero }) => {
   console.log({ hero });
   return (

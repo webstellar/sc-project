@@ -15,6 +15,7 @@ import { Link } from "react-router-dom";
 import Banner from "../../images/banner-test.jpg";
 import AppreciationDetailsSideBarBottom from "./AppreciationDetailsSideBarBottom";
 
+import dayjs from "dayjs";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -34,10 +35,12 @@ const AppreciationDetails = () => {
     dispatch(getAppreciationDetails(id));
 
     if (error) {
-      //alert.error(error);
+      alert.error(error);
       dispatch(clearErrors);
     }
   }, [dispatch, error, id]);
+
+  const apprDate = dayjs(appreciation.createdAt).format("MMM D, YYYY");
 
   return (
     <Fragment>
@@ -62,10 +65,10 @@ const AppreciationDetails = () => {
                     </Navbar.Brand>
                     <Navbar.Brand>
                       <span className="fw-bold" style={{ fontSize: "18px" }}>
-                        {"Appreciator"}
+                        {appreciation?.user ? appreciation?.user : "Admin"}
                       </span>
                       <span className="d-flex" style={{ fontSize: "12px" }}>
-                        {"Jan 20"}
+                        {apprDate}
                       </span>
                     </Navbar.Brand>
                     <Navbar.Toggle />

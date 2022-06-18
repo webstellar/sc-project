@@ -2,24 +2,15 @@ import React, { Fragment, useState, useEffect } from "react";
 import MetaData from "../layout/MetaData";
 import Loader from "../layout/Loader";
 import ErrorBoundary from "../../ErrorBoundary";
-
-import Google from "../../images/google.svg";
-import Linkedin from "../../images/linkedin.svg";
 import { Container, Row, Col, Form, Button } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { register, clearErrors } from "../../actions/userAction";
+import { updateProfile, loadUser, clearErrors } from "../../actions/userAction";
+import { useNavigate } from "react-router-dom";
+import { UPDATE_PROFILE_RESET } from "../../constants/userConstant";
 
-const Register = () => {
-  const [user, setUser] = useState({
-    name: "",
-    email: "",
-    password: "",
-    confirmPassword: "",
-  });
-
-  const { name, email, password, confirmPassword } = user;
-
+const UpdateProfile = () => {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
   const [profilePicture, setProfilePicture] = useState("");
   const [profilePicturePreview, setProfilePicturePreview] = useState(
     "https://res.cloudinary.com/dja7mdaul/image/upload/v1655345210/social-coin/user_avatar/defaultProfile_ouwetk.jpg"
@@ -28,20 +19,32 @@ const Register = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const { isAuthenticated, error, loading } = useSelector(
-    (state) => state.auth
-  );
+  const { user } = useSelector((state) => state.auth);
+  const { error, isUpdated, loading } = useSelector((state) => state.user);
 
   useEffect(() => {
-    if (isAuthenticated) {
-      navigate("/");
+    if (user) {
+      setName(user.name);
+      setEmail(user.email);
+      setProfilePicturePreview(user.profilePicture.url);
     }
 
     if (error) {
       alert.error(error);
       dispatch(clearErrors());
     }
-  }, [dispatch, alert, isAuthenticated, error, navigate]);
+
+    if (isUpdated) {
+      alert.success("User updated successfully");
+      dispatch(loadUser());
+
+      navigate("/me");
+
+      dispatch({
+        type: UPDATE_PROFILE_RESET,
+      });
+    }
+  }, [dispatch, alert, error, user, navigate, isUpdated]);
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -49,30 +52,23 @@ const Register = () => {
     const formData = new FormData();
     formData.set("name", name);
     formData.set("email", email);
-    formData.set("password", password);
-    formData.set("confirmPassword", confirmPassword);
     formData.set("profilePicture", profilePicture);
 
-    dispatch(register(formData));
+    dispatch(updateProfile(formData));
   };
 
   const onChange = (e) => {
-    if (e.target.name === "profilePicture") {
-      const reader = new FileReader();
+    const reader = new FileReader();
 
-      reader.onload = () => {
-        if (reader.readyState === 2) {
-          setProfilePicturePreview(reader.result);
-          setProfilePicture(reader.result);
-        }
-      };
+    reader.onload = () => {
+      if (reader.readyState === 2) {
+        setProfilePicturePreview(reader.result);
+        setProfilePicture(reader.result);
+      }
+    };
 
-      reader.readAsDataURL(e.target.files[0]);
-    } else {
-      setUser({ ...user, [e.target.name]: e.target.value });
-    }
+    reader.readAsDataURL(e.target.files[0]);
   };
-
   return (
     <Fragment>
       {loading ? (
@@ -80,11 +76,11 @@ const Register = () => {
       ) : (
         <Fragment>
           <ErrorBoundary>
-            <MetaData title={"Signup/Register"} />
+            <MetaData title={"Update Profile"} />
             <Container>
               <Row className="justify-content-center">
                 <Col xs={6} md={4} className="mb-5">
-                  <h2 className="pw-bolder text-center">sign up</h2>
+                  <h2 className="pw-bolder text-center">update profile</h2>
                   <div className="mt-5 sc-logincontrol">
                     <Form
                       onSubmit={submitHandler}
@@ -99,7 +95,9 @@ const Register = () => {
                           className="sc-disablefocus rounded-pill border-dark"
                           name="name"
                           value={name}
-                          onChange={onChange}
+                          onChange={(e) => {
+                            setName(e.target.value);
+                          }}
                         />
                       </Form.Group>
                       <Form.Group className="mb-3">
@@ -111,33 +109,12 @@ const Register = () => {
                           className="sc-disablefocus rounded-pill border-dark"
                           name="email"
                           value={email}
-                          onChange={onChange}
+                          onChange={(e) => {
+                            setEmail(e.target.value);
+                          }}
                         />
                       </Form.Group>
-                      <Form.Group className="mb-3">
-                        <Form.Label htmlFor="password_field">
-                          password
-                        </Form.Label>
-                        <Form.Control
-                          type="password"
-                          className="sc-disablefocus rounded-pill border-dark"
-                          name="password"
-                          value={password}
-                          onChange={onChange}
-                        />
-                      </Form.Group>
-                      <Form.Group className="mb-3">
-                        <Form.Label htmlFor="password_field">
-                          confirm password
-                        </Form.Label>
-                        <Form.Control
-                          type="Password"
-                          className="sc-disablefocus rounded-pill border-dark"
-                          name="password"
-                          value={confirmPassword}
-                          onChange={onChange}
-                        />
-                      </Form.Group>
+
                       <Form.Group className="mb-3">
                         <Form.Label htmlFor="profilePicture_field">
                           profile picture
@@ -177,36 +154,10 @@ const Register = () => {
                           className="rounded-pill btn-dark btn-outline-light border-dark"
                           disabled={loading ? true : false}
                         >
-                          sign up
+                          update profile
                         </Button>
                       </div>
                     </Form>
-                    <div className="mt-5 mb-5">
-                      <hr />
-                    </div>
-
-                    <div class="d-grid gap-2 mb-3">
-                      <Button className="sc-disablefocus rounded-pill btn-labeled btn-light btn-outline-dark">
-                        <img
-                          src={Google}
-                          alt="linkedin icon"
-                          style={{ width: 18, height: 18 }}
-                          className="pe-1"
-                        />
-                        sign up with Google
-                      </Button>
-                    </div>
-                    <div class="d-grid gap-2 mb-3">
-                      <Button className="sc-disablefocus rounded-pill btn-labeled btn-light btn-outline-dark">
-                        <img
-                          src={Linkedin}
-                          alt="linkedin icon"
-                          style={{ width: 18, height: 18 }}
-                          className="pe-1"
-                        />
-                        sign up with LinkedIn
-                      </Button>
-                    </div>
                   </div>
                 </Col>
               </Row>
@@ -218,4 +169,4 @@ const Register = () => {
   );
 };
 
-export default Register;
+export default UpdateProfile;

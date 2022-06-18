@@ -2,8 +2,10 @@ import React, { Fragment } from "react";
 import { Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import Banner from "../../../images/banner-test.jpg";
+import dayjs from "dayjs";
 
 const Appreciation = ({ appreciation }) => {
+  const apprDate = dayjs(appreciation.createdAt).format("MMM D, YYYY");
   return (
     <Fragment>
       <Row
@@ -11,7 +13,7 @@ const Appreciation = ({ appreciation }) => {
         as={Link}
         to={`/appreciation/${appreciation._id}`}
       >
-        <p>{String(appreciation.createdAt).substring(0, 10)}</p>
+        <p>{apprDate}</p>
         <div className="mb-3">
           <div className="d-flex position-relative align-content-around">
             <div className="me-lg-5">
@@ -36,7 +38,9 @@ const Appreciation = ({ appreciation }) => {
                   alt={`${appreciation.name}'s appreciator `}
                 />
               )}
-              <p className="text-end">{"UserID here"}</p>
+              <p className="text-end">
+                {appreciation?.user ? appreciation?.user : "Admin"}
+              </p>
             </div>
           </div>
         </div>

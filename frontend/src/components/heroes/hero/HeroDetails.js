@@ -10,7 +10,7 @@ import Loader from "../../layout/Loader";
 import { GoPrimitiveDot } from "react-icons/go";
 //import InfiniteScroll from "react-infinite-scroll-component";
 
-import { useParams, Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
   getHeroDetails,
