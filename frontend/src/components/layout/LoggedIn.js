@@ -2,7 +2,6 @@ import React, { Fragment } from "react";
 import { Dropdown, Row, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { BsBell, BsChevronDown, BsArrowUpRight } from "react-icons/bs";
-import { useState } from "react";
 
 import { useDispatch } from "react-redux";
 import { logout } from "../../actions/userAction";
@@ -13,11 +12,9 @@ const LoggedIn = ({ user }) => {
 
   const dispatch = useDispatch();
 
-  const [notification, setNotification] = useState("unread messages");
-
   const logoutHandler = () => {
     dispatch(logout());
-    alert.success("Logged out successfully.");
+    //alert.success("Logged out successfully.");
   };
 
   return (

@@ -215,3 +215,33 @@ h6 span {
   font-family: auto;
   width: auto;
 }
+
+.sc-adminsidebar div.dropdown-menu {
+  position: relative !important;
+  transform: translate(0px, 0px) !important;
+  border: none !important;
+}
+
+.sc-adminsidebar.nav-item.dropdown {
+  background-color: #6c646436 !important;
+  border-radius: 5px !important;
+  margin-bottom: 1rem !important;
+}
+
+.sc-adminsidebar a#nav-dropdown {
+  color: rgba(0, 0, 0, 0.7) !important;
+  font-weight: bold;
+}
+
+.sc-adminsidebar.nav-item.dropdown:active {
+  background-color: #356feb36 !important;
+  border-radius: 5px !important;
+  margin-bottom: 1rem !important;
+}
+
+.sc-adminsidebar.nav-item.dropdown:hover {
+  background-color: #356feb36 !important;
+  border-radius: 5px !important;
+  margin-bottom: 1rem !important;
+}
+

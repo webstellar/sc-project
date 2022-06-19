@@ -8,21 +8,16 @@ const {
   getSingleAppreciation,
   updateAppreciation,
   deleteAppreciation,
+  getAdminAppreciations,
 } = require("../controllers/appreciationControllers");
+const { isAuthenticatedUser } = require("../middlewares/auth");
 
-const { isAuthenticatedUser, authorizeRoles } = require("../middlewares/auth");
-
-//GET Appreciation and link
 router.route("/appreciations").get(getAppreciations);
-
-//Get Single Appreciation and Link
+router.route("/admin/appreciations").get(getAdminAppreciations);
 router.route("/appreciation/:id").get(getSingleAppreciation);
-
-//POST Appreciation and link***********************
-router.route("/user/appreciation/new").post(isAuthenticatedUser, newAppreciation);
-
-//Put Single Appreciation and Edit****************
-//Delete Single Appreciation
+router
+  .route("/user/appreciation/new")
+  .post(isAuthenticatedUser, newAppreciation);
 router
   .route("/user/appreciation/:id")
   .put(isAuthenticatedUser, updateAppreciation)

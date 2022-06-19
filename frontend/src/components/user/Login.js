@@ -28,7 +28,7 @@ const Login = () => {
     }
 
     if (error) {
-      alert.error(error);
+      //alert.error(error);
       dispatch(clearErrors());
     }
   }, [dispatch, alert, isAuthenticated, error, navigate]);
@@ -36,7 +36,7 @@ const Login = () => {
   const submitHandler = (e) => {
     e.preventDefault();
     dispatch(login(email, password));
-    alert.success("Logged in successfully.");
+    //alert.success("Logged in successfully.");
   };
 
   return (

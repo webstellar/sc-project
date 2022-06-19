@@ -56,7 +56,7 @@ const AppreciationDetails = () => {
                   <Navbar className="justify-content-start mb-5">
                     <Navbar.Brand as={Link} to="/">
                       <img
-                        src="https://github.com/mdo.png"
+                        src={appreciation.user ? appreciation.user.profilePicture : null}
                         alt="mdo"
                         width="50"
                         height="50"
@@ -88,7 +88,7 @@ const AppreciationDetails = () => {
                       {appreciation.summary}
                     </h1>
                     <div className="mb-4">
-                      {appreciation.image.url ? (
+                      {appreciation.image ? (
                         <Image
                           src={appreciation.image.url}
                           style={{ width: "800px", height: "500px" }}

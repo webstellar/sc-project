@@ -9,25 +9,17 @@ const {
   updateHero,
   deleteHero,
   associateHeroAppreciations,
+  getAdminHeroes,
 } = require("../controllers/heroControllers");
 const { isAuthenticatedUser } = require("../middlewares/auth");
 
-//Get All Heroes
 router.route("/heroes").get(getHeroes);
-
-//Get A Single Hero
+router.route("/admin/heroes").get(getAdminHeroes);
 router.route("/hero/:id").get(getSingleHero);
-
-//Post a Hero to the DB
 router.route("/user/hero/new").post(isAuthenticatedUser, newHero);
-
-//Post a Hero and Apprecation Association
 router
   .route("/hero/:heroid/:appreciationid")
   .post(isAuthenticatedUser, associateHeroAppreciations);
-
-//Put and Edit a Single Hero
-//Delete Single Hero
 router
   .route("/user/hero/:id")
   .put(isAuthenticatedUser, updateHero)

@@ -11,6 +11,7 @@
     "bootstrap-icons": "^1.8.3",
     "dayjs": "^1.11.2",
     "http-proxy-middleware": "^2.0.6",
+    "mdbreact": "^5.2.0",
     "react": "^18.2.0",
     "react-bootstrap": "^2.4.0",
     "react-dom": "^18.2.0",
@@ -49,5 +50,6 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "proxy": "http://127.0.0.1:4000"
 }

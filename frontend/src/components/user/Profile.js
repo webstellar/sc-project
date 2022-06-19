@@ -1,22 +1,11 @@
 import React, { Fragment } from "react";
-import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
-import {
-  Container,
-  Navbar,
-  Nav,
-  Tabs,
-  Tab,
-  Row,
-  Col,
-  ListGroup,
-} from "react-bootstrap";
+import { Container, Navbar, Nav, Tabs, Tab } from "react-bootstrap";
 import MetaData from "../layout/MetaData";
 import Loader from "../layout/Loader";
 import ProfileTab from "./ProfileTab";
 
 import { BsPlus } from "react-icons/bs";
-import { useRef } from "react";
 
 const Profile = () => {
   const { user, loading } = useSelector((state) => state.auth);

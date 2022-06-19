@@ -8,7 +8,6 @@ import HeroDetailsAbout from "./HeroDetailsAbout";
 import HeroAppreciationLink from "./HeroAppreciationLink";
 import Loader from "../../layout/Loader";
 import { GoPrimitiveDot } from "react-icons/go";
-//import InfiniteScroll from "react-infinite-scroll-component";
 
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -31,7 +30,7 @@ const HeroDetails = () => {
     dispatch(getHeroes());
 
     if (error) {
-      alert.error(error);
+      //alert.error(error);
       dispatch(clearErrors());
     }
   }, [dispatch, error, params.id]);
@@ -73,7 +72,7 @@ const HeroDetails = () => {
                 </Col>
 
                 <Col sm={4} className="ps-5">
-                  <HeroDetailsSideBar hero={hero} />
+                  <HeroDetailsSideBar key={hero._id} hero={hero} />
                   <ListGroup variant="flush" className="mb-4 mt-5">
                     <span>
                       <span

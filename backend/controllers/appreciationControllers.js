@@ -6,8 +6,23 @@ const APIFeatures = require("../utils/apiFeatures");
 
 //create new appreciation => /api/v1/appreciation/new
 exports.newAppreciation = catchAsyncErrors(async (req, res, next) => {
-  req.body.user = req.user.id;
+  const image = await cloudinary.v2.uploader.upload(req.body.image, {
+    folder: "social-coin/appreciations/images",
+    width: 240,
+    crop: "scale",
+  });
+  const audio = await cloudinary.v2.uploader.upload(req.body.audio, {
+    folder: "social-coin/appreciations/audios",
+  });
+  const video = await cloudinary.v2.uploader.upload(req.body.video, {
+    folder: "social-coin/appreciations/images",
+  });
 
+  req.body.image = image;
+  req.body.audio = audio;
+  req.body.video = video;
+
+  req.body.user = req.user.id;
   const appreciation = await Appreciation.create(req.body);
 
   res.status(201).json({
@@ -18,7 +33,6 @@ exports.newAppreciation = catchAsyncErrors(async (req, res, next) => {
 
 //Get all appreciations => /api/v1/appreciations
 exports.getAppreciations = catchAsyncErrors(async (req, res, next) => {
-  const resPerPage = 4;
   const appreciationsCount = await Appreciation.countDocuments();
 
   const apiFeatures = new APIFeatures(
@@ -26,15 +40,23 @@ exports.getAppreciations = catchAsyncErrors(async (req, res, next) => {
     req.query
   )
     .search()
-    .filter()
-    .pagination(resPerPage);
+    .filter();
 
   const appreciations = await apiFeatures.query;
 
   res.status(200).json({
     success: true,
     appreciationsCount,
-    resPerPage,
+    appreciations,
+  });
+});
+
+//Get all appreciations => /api/v1/admin/appreciations
+exports.getAdminAppreciations = catchAsyncErrors(async (req, res, next) => {
+  const appreciations = await Appreciation.find();
+
+  res.status(200).json({
+    success: true,
     appreciations,
   });
 });

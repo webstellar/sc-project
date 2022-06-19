@@ -2,16 +2,20 @@ import React, { useEffect } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import ProtectedRoute from "./components/route/ProtectedRoute";
 import "./App.css";
+
 import HeaderNav from "./components/layout/HeaderNav";
+import FooterNav from "./components/layout/FooterNav";
+
 import Home from "./components/pages/Home";
 import Discover from "./components/pages/Discover";
 import FAQs from "./components/pages/FAQs";
 import HelpCenter from "./components/pages/HelpCenter";
 import Donate from "./components/pages/Donate";
 import ContactUs from "./components/pages/ContactUs";
-import FooterNav from "./components/layout/FooterNav";
+
 import HeroDetails from "./components/heroes/hero/HeroDetails";
 import AppreciationDetails from "./components/appreciations/AppreciationDetails";
+
 import Register from "./components/user/Register";
 import Login from "./components/user/Login";
 import Profile from "./components/user/Profile";
@@ -19,6 +23,10 @@ import UpdateProfile from "./components/user/UpdateProfile";
 import UpdatePassword from "./components/user/UpdatePassword";
 import ForgotPassword from "./components/user/ForgotPassword";
 import NewPassword from "./components/user/NewPassword";
+
+import Dashboard from "./components/admin/Dashboard";
+import HeroesList from "./components/admin/HeroesList";
+import AppreciationsList from "./components/admin/AppreciationsList";
 
 import { loadUser } from "./actions/userAction";
 import store from "./store";
@@ -50,6 +58,9 @@ function App() {
             </ProtectedRoute>
           }
         />
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/admin/appreciations" element={<AppreciationsList />} />
+        <Route path="/admin/heroes" element={<HeroesList />} />
         <Route
           path="/me/update"
           element={

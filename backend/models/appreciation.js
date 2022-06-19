@@ -58,11 +58,6 @@ const appreciationSchema = new mongoose.Schema(
       default: 0,
     },
     yearOfAppreciation: Date,
-    user: {
-      type: mongoose.Schema.ObjectId,
-      ref: "User",
-      required: true,
-    },
     createdAt: {
       type: Date,
       default: Date.now,

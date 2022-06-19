@@ -1,5 +1,4 @@
 import React, { Fragment, useEffect } from "react";
-import Loader from "../layout/Loader";
 import HeroAppreciationLink from "../heroes/hero/HeroAppreciationLink";
 
 import { GoPrimitiveDot } from "react-icons/go";
@@ -13,7 +12,7 @@ import { getHeroes } from "../../actions/heroActions";
 const ProfileTab = ({ user }) => {
   const dispatch = useDispatch();
 
-  const { loading, heroes, error } = useSelector((state) => state.heroes);
+  const { heroes, error } = useSelector((state) => state.heroes);
 
   useEffect(() => {
     dispatch(getHeroes());
@@ -21,7 +20,7 @@ const ProfileTab = ({ user }) => {
 
   const logoutHandler = () => {
     dispatch(logout());
-    alert.success("Logged out successfully.");
+    //alert.success("Logged out successfully.");
   };
   return (
     <Fragment>

@@ -1,9 +1,20 @@
-import React from 'react'
+import React, { Fragment } from "react";
+import AdminSideBar from "./AdminSideBar";
+import { Container, Row, Col } from "react-bootstrap";
 
-const dashboard = () => {
+const Dashboard = () => {
   return (
-    <div>dashboard</div>
-  )
-}
+    <Fragment>
+      <Container>
+        <Row md={2}>
+          <Col xs={4} md={2}>
+            <AdminSideBar />
+          </Col>
+          <Col xs={12} md={8}></Col>
+        </Row>
+      </Container>
+    </Fragment>
+  );
+};
 
-export default dashboard
+export default Dashboard;

@@ -25,7 +25,7 @@ const Home = () => {
     }
 
     dispatch(getHeroes(keyword));
-  }, [dispatch, alert, keyword, error]);
+  }, [dispatch, keyword, error]);
 
   return (
     <Fragment>
