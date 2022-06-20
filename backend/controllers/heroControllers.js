@@ -8,12 +8,15 @@ const cloudinary = require("cloudinary");
 
 //Create a new Hero
 exports.newHero = catchAsyncErrors(async (req, res, next) => {
-  const profilePicture = await cloudinary.v2.uploader.upload(req.body.profilePicture, {
-    folder: "social-coin/hero_avatars",
-    width: 240,
-    crop: "scale",
-  });
-  
+  const profilePicture = await cloudinary.v2.uploader.upload(
+    req.body.profilePicture,
+    {
+      folder: "social-coin/hero_avatars",
+      width: 240,
+      crop: "scale",
+    }
+  );
+
   req.body.profilePicture = profilePicture;
   req.body.user = req.user.id;
   const hero = await Hero.create(req.body);
@@ -29,12 +32,10 @@ exports.getHeroes = catchAsyncErrors(async (req, res, next) => {
   const resPerPage = 8;
   const heroesCount = await Hero.countDocuments();
 
-  apiFeatures = new APIFeatures(
+  const apiFeatures = new APIFeatures(
     Hero.find().populate("appreciations"),
     req.query
-  )
-    .search()
-    .filter();
+  ).search();
 
   const heroes = await apiFeatures.query;
 
@@ -48,7 +49,7 @@ exports.getHeroes = catchAsyncErrors(async (req, res, next) => {
 
 //Get All Heroes => /api/v1/admin/heroes
 exports.getAdminHeroes = catchAsyncErrors(async (req, res, next) => {
-  const heroes = await Hero.find();
+  const heroes = await Hero.find().populate("appreciations");
 
   res.status(200).json({
     success: true,
@@ -120,6 +121,7 @@ exports.deleteHero = catchAsyncErrors(async (req, res, next) => {
   }
 
   await hero.deleteOne();
+
   res.status(200).json({
     success: true,
     message: "Hero successfully deleted",

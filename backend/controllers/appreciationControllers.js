@@ -107,10 +107,24 @@ exports.deleteAppreciation = catchAsyncErrors(async (req, res, next) => {
     return next(new ErrorHandler("Appreciation not found", 404));
   }
 
+  //Deleting images, audio and video associated with the appreciation
+
+  const imageResult = await cloudinary.v2.uploader.destroy(
+    appreciation.image.public_id
+  );
+
+  const audioResult = await cloudinary.v2.uploader.destroy(
+    appreciation.audio.public_id
+  );
+
+  const videoResult = await cloudinary.v2.uploader.destroy(
+    appreciation.video.public_id
+  );
+
   await appreciation.deleteOne();
   res.status(200).json({
     success: true,
-    message: "Appreciation has been succesfully deleted",
+    message: "Appreciation has been deleted",
   });
 });
 

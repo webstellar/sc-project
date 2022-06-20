@@ -34,28 +34,34 @@ export const heroesReducer = (state = { heroes: [] }, action) => {
         loading: true,
         heroes: [],
       };
+
     case ALL_HEROES_SUCCESS:
       return {
         loading: false,
         heroes: action.payload.heroes,
+        resPerPage: action.payload.resPerPage,
         heroesCount: action.payload.heroesCount,
       };
+
     case ADMIN_HEROES_SUCCESS:
       return {
         loading: false,
         heroes: action.payload,
       };
+
     case ALL_HEROES_FAIL:
     case ADMIN_HEROES_FAIL:
       return {
         loading: false,
         error: action.payload,
       };
+
     case CLEAR_ERRORS:
       return {
         ...state,
         error: null,
       };
+
     default:
       return state;
   }

@@ -10,17 +10,34 @@ const {
   deleteAppreciation,
   getAdminAppreciations,
 } = require("../controllers/appreciationControllers");
-const { isAuthenticatedUser } = require("../middlewares/auth");
+const { isAuthenticatedUser, authorizeRoles } = require("../middlewares/auth");
 
 router.route("/appreciations").get(getAppreciations);
-router.route("/admin/appreciations").get(getAdminAppreciations);
+
 router.route("/appreciation/:id").get(getSingleAppreciation);
+
+//users
 router
   .route("/user/appreciation/new")
-  .post(isAuthenticatedUser, newAppreciation);
+  .post(isAuthenticatedUser, authorizeRoles("user"), newAppreciation);
+
 router
   .route("/user/appreciation/:id")
-  .put(isAuthenticatedUser, updateAppreciation)
-  .delete(isAuthenticatedUser, deleteAppreciation);
+  .put(isAuthenticatedUser, authorizeRoles("user"), updateAppreciation)
+  .delete(isAuthenticatedUser, authorizeRoles("user"), deleteAppreciation);
+
+//Admin
+router
+  .route("/admin/appreciation/new")
+  .post(isAuthenticatedUser, authorizeRoles("admin"), newAppreciation);
+
+router
+  .route("/admin/appreciations")
+  .get(isAuthenticatedUser, authorizeRoles("admin"), getAdminAppreciations);
+
+router
+  .route("/admin/appreciation/:id")
+  .put(isAuthenticatedUser, authorizeRoles("admin"), updateAppreciation)
+  .delete(isAuthenticatedUser, authorizeRoles("admin"), deleteAppreciation);
 
 module.exports = router;

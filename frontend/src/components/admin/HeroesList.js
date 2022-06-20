@@ -15,12 +15,14 @@ import {
   deleteHero,
   clearErrors,
 } from "../../actions/heroActions";
+import { DELETE_HERO_RESET } from "../../constants/heroConstant";
 
 const HeroesList = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const { loading, error, heroes } = useSelector((state) => state.heroes);
+  const { error: deleteError, isDeleted } = useSelector((state) => state.hero);
 
   useEffect(() => {
     dispatch(getAdminHeroes());
@@ -28,7 +30,16 @@ const HeroesList = () => {
     if (error) {
       dispatch(clearErrors());
     }
-  }, [dispatch, error]);
+
+    if (deleteError) {
+      dispatch(clearErrors());
+    }
+
+    if (isDeleted) {
+      navigate("/admin/heroes");
+      dispatch({ type: DELETE_HERO_RESET });
+    }
+  }, [dispatch, error, deleteError, isDeleted, navigate]);
 
   const setHeroes = () => {
     const data = {
@@ -79,11 +90,11 @@ const HeroesList = () => {
         gender: hero.gender,
         country: hero.country,
         email: hero.email,
-        appreciationsCount: hero.appreciations.length,
+        appreciationsCount: hero.appreciationsCount,
         actions: (
           <Fragment>
             <Link
-              to={`/admin/product/${hero._id}`}
+              to={`/admin/hero/${hero._id}`}
               className="btn btn-Primary py-1 px-2"
             >
               <BsPencil />
@@ -108,11 +119,11 @@ const HeroesList = () => {
     <Fragment>
       <MetaData title={"All Heroes"} />
       <Container>
-        <Row md={2}>
+        <Row>
           <Col xs={4} md={2}>
             <AdminSideBar />
           </Col>
-          <Col xs={12} md={8}>
+          <Col>
             <Fragment>
               <h1 className="my-5">All Heroes</h1>
               {loading ? (

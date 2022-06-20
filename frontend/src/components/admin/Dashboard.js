@@ -6,11 +6,11 @@ const Dashboard = () => {
   return (
     <Fragment>
       <Container>
-        <Row md={2}>
+        <Row>
           <Col xs={4} md={2}>
             <AdminSideBar />
           </Col>
-          <Col xs={12} md={8}></Col>
+          <Col></Col>
         </Row>
       </Container>
     </Fragment>

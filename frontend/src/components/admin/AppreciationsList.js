@@ -15,6 +15,7 @@ import {
   deleteAppreciation,
   clearErrors,
 } from "../../actions/appreciationActions";
+import { DELETE_APPRECIATION_RESET } from "../../constants/appreciationConstant";
 
 const AppreciationsList = () => {
   const dispatch = useDispatch();
@@ -24,11 +25,24 @@ const AppreciationsList = () => {
     (state) => state.appreciations
   );
 
+  const { error: deleteError, isDeleted } = useSelector(
+    (state) => state.appreciation
+  );
+
   useEffect(() => {
     dispatch(getAdminAppreciations());
 
     if (error) {
       dispatch(clearErrors());
+    }
+
+    if (deleteError) {
+      dispatch(clearErrors());
+    }
+
+    if (isDeleted) {
+      navigate("/admin/appreciations");
+      dispatch({ type: DELETE_APPRECIATION_RESET });
     }
   }, [dispatch, error]);
 
@@ -43,6 +57,11 @@ const AppreciationsList = () => {
         {
           label: "Hero",
           field: "hero",
+          sort: "asc",
+        },
+        {
+          label: "Appreciator",
+          field: "user",
           sort: "asc",
         },
         {
@@ -62,15 +81,13 @@ const AppreciationsList = () => {
     appreciations.forEach((appreciation) => {
       data.rows.push({
         id: appreciation._id,
-        name: appreciation.name,
-        gender: appreciation.gender,
-        country: appreciation.country,
-        email: appreciation.email,
-        appreciationsCount: appreciation.appreciationsCount,
+        hero: appreciation.name,
+        user: appreciation.user,
+        likeCount: appreciation.likeCount,
         actions: (
           <Fragment>
             <Link
-              to={`/admin/product/${appreciation._id}`}
+              to={`/admin/appreciation/${appreciation._id}`}
               className="btn btn-Primary py-1 px-2"
             >
               <BsPencil />
@@ -95,11 +112,11 @@ const AppreciationsList = () => {
     <Fragment>
       <MetaData title={"All Appreciations"} />
       <Container>
-        <Row md={2}>
+        <Row>
           <Col xs={4} md={2}>
             <AdminSideBar />
           </Col>
-          <Col xs={12} md={8}>
+          <Col>
             <Fragment>
               <h1 className="my-5">All Appreciations</h1>
               {loading ? (

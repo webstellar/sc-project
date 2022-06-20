@@ -8,6 +8,8 @@ module.exports = function (app) {
       changeOrigin: true,
     })
   );
+
+  app.listen(3000);
 };
 
 //"proxy": "http://127.0.0.1:4000",
