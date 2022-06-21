@@ -9,14 +9,15 @@ import { Container, Row, Col, Form, Button } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { login, clearErrors } from "../../actions/userAction";
+import { ToastContainer, toast } from "react-toastify";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const dispatch = useDispatch();
-
   const navigate = useNavigate();
+  //const alert = toast();
 
   const { isAuthenticated, error, loading } = useSelector(
     (state) => state.auth
@@ -28,7 +29,7 @@ const Login = () => {
     }
 
     if (error) {
-      //alert.error(error);
+      toast.error(error);
       dispatch(clearErrors());
     }
   }, [dispatch, alert, isAuthenticated, error, navigate]);
@@ -36,7 +37,7 @@ const Login = () => {
   const submitHandler = (e) => {
     e.preventDefault();
     dispatch(login(email, password));
-    //alert.success("Logged in successfully.");
+    toast.success("Logged in successfully.");
   };
 
   return (
@@ -132,6 +133,17 @@ const Login = () => {
                   </div>
                 </Col>
               </Row>
+              <ToastContainer
+                position="bottom-left"
+                autoClose={5000}
+                hideProgressBar={true}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+              />
             </Container>
           </ErrorBoundary>
         </Fragment>

@@ -10,6 +10,8 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { register, clearErrors } from "../../actions/userAction";
 
+import { toast } from "react-toastify";
+
 const Register = () => {
   const [user, setUser] = useState({
     name: "",
@@ -27,6 +29,7 @@ const Register = () => {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const alert = toast();
 
   const { isAuthenticated, error, loading } = useSelector(
     (state) => state.auth

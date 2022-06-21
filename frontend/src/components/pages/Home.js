@@ -8,10 +8,12 @@ import ErrorBoundary from "../../ErrorBoundary";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getHeroes } from "../../actions/heroActions";
+import { ToastContainer, toast } from "react-toastify";
 
 const Home = () => {
   const dispatch = useDispatch();
   const params = useParams();
+  const alert = toast();
 
   const { loading, heroes, error, heroesCount } = useSelector(
     (state) => state.heroes
@@ -25,7 +27,7 @@ const Home = () => {
     }
 
     dispatch(getHeroes(keyword));
-  }, [dispatch, keyword, error]);
+  }, [dispatch, keyword, alert, error]);
 
   return (
     <Fragment>
@@ -41,6 +43,17 @@ const Home = () => {
                   heroes.map((hero) => <Hero key={hero._id} hero={hero} />)}
               </ErrorBoundary>
             </Row>
+            <ToastContainer
+              position="bottom-left"
+              autoClose={5000}
+              hideProgressBar={true}
+              newestOnTop={false}
+              closeOnClick
+              rtl={false}
+              pauseOnFocusLoss
+              draggable
+              pauseOnHover
+            />
           </Container>
         </Fragment>
       )}

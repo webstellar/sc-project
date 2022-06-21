@@ -27,6 +27,7 @@ import NewPassword from "./components/user/NewPassword";
 import Dashboard from "./components/admin/Dashboard";
 import HeroesList from "./components/admin/HeroesList";
 import AppreciationsList from "./components/admin/AppreciationsList";
+import NewAdminHero from "./components/admin/NewAdminHero";
 
 import { loadUser } from "./actions/userAction";
 import store from "./store";
@@ -58,9 +59,7 @@ function App() {
             </ProtectedRoute>
           }
         />
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/admin/appreciations" element={<AppreciationsList />} />
-        <Route path="/admin/heroes" element={<HeroesList />} />
+
         <Route
           path="/me/update"
           element={
@@ -74,6 +73,39 @@ function App() {
           element={
             <ProtectedRoute>
               <UpdatePassword />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/dashboard"
+          element={
+            <ProtectedRoute isAdmin="admin">
+              <Dashboard />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/admin/appreciations"
+          element={
+            <ProtectedRoute isAdmin="admin">
+              <AppreciationsList />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/admin/heroes"
+          element={
+            <ProtectedRoute isAdmin="admin">
+              <HeroesList />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/admin/hero"
+          element={
+            <ProtectedRoute isAdmin="admin">
+              <NewAdminHero />
             </ProtectedRoute>
           }
         />

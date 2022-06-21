@@ -5,16 +5,18 @@ import { BsBell, BsChevronDown, BsArrowUpRight } from "react-icons/bs";
 
 import { useDispatch } from "react-redux";
 import { logout } from "../../actions/userAction";
+import { toast } from "react-toastify";
 
 const LoggedIn = ({ user }) => {
   //TODO: set State for Notification
   //TODO: Pull list of notifications
 
+  const alert = toast();
   const dispatch = useDispatch();
 
   const logoutHandler = () => {
     dispatch(logout());
-    //alert.success("Logged out successfully.");
+    alert.success("Logged out successfully.");
   };
 
   return (

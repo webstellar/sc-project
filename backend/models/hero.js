@@ -34,7 +34,9 @@ const heroSchema = new mongoose.Schema(
 
     country: {
       type: String,
-      default: "Nigeria",
+      enum: {
+        values: [],
+      },
     },
     email: {
       type: String,

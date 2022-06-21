@@ -23,22 +23,25 @@ import {
   clearErrors,
 } from "../../actions/appreciationActions";
 
+import { toast } from "react-toastify";
+
 const AppreciationDetails = () => {
-  const { id } = useParams();
+  const params = useParams();
   const dispatch = useDispatch();
+  const alert = toast();
 
   const { loading, error, appreciation } = useSelector(
     (state) => state.appreciationDetails
   );
 
   useEffect(() => {
-    dispatch(getAppreciationDetails(id));
+    dispatch(getAppreciationDetails(params.id));
 
     if (error) {
       alert.error(error);
       dispatch(clearErrors);
     }
-  }, [dispatch, error, id]);
+  }, [dispatch, error, alert, params.id]);
 
   const apprDate = dayjs(appreciation.createdAt).format("MMM D, YYYY");
 
@@ -56,7 +59,11 @@ const AppreciationDetails = () => {
                   <Navbar className="justify-content-start mb-5">
                     <Navbar.Brand as={Link} to="/">
                       <img
-                        src={appreciation.user ? appreciation.user.profilePicture : null}
+                        src={
+                          appreciation.user
+                            ? appreciation.user.profilePicture
+                            : null
+                        }
                         alt="mdo"
                         width="50"
                         height="50"

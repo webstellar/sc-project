@@ -9,18 +9,21 @@ import { Link } from "react-router-dom";
 import { logout } from "../../actions/userAction";
 import { getHeroes } from "../../actions/heroActions";
 
+import { toast } from "react-toastify";
+
 const ProfileTab = ({ user }) => {
   const dispatch = useDispatch();
+  const alert = toast();
 
   const { heroes, error } = useSelector((state) => state.heroes);
 
   useEffect(() => {
     dispatch(getHeroes());
-  }, [dispatch, error]);
+  }, [dispatch, alert, error]);
 
   const logoutHandler = () => {
     dispatch(logout());
-    //alert.success("Logged out successfully.");
+    alert.success("Logged out successfully.");
   };
   return (
     <Fragment>
