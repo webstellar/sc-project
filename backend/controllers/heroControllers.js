@@ -8,17 +8,18 @@ const cloudinary = require("cloudinary");
 
 //Create a new Hero
 exports.newHero = catchAsyncErrors(async (req, res, next) => {
-  const profilePicture = await cloudinary.v2.uploader.upload(
-    req.body.profilePicture,
-    {
-      folder: "social-coin/hero_avatars",
-      width: 240,
-      crop: "scale",
-    }
-  );
+  const result = await cloudinary.v2.uploader.upload(req.body.profilePicture, {
+    folder: "social-coin/hero_avatars",
+    width: 240,
+    crop: "scale",
+  });
 
-  req.body.profilePicture = profilePicture;
+  req.body.profilePicture.public_id = result.public_id;
+
+  req.body.profilePicture.url = result.secure_url;
+
   req.body.user = req.user.id;
+
   const hero = await Hero.create(req.body);
 
   res.status(201).json({
@@ -49,7 +50,8 @@ exports.getHeroes = catchAsyncErrors(async (req, res, next) => {
 
 //Get All Heroes => /api/v1/admin/heroes
 exports.getAdminHeroes = catchAsyncErrors(async (req, res, next) => {
-  const heroes = await Hero.find().populate("appreciations");
+  //const heroes = await Hero.find().populate("appreciations");
+  const heroes = await Hero.find();
 
   res.status(200).json({
     success: true,
@@ -59,8 +61,9 @@ exports.getAdminHeroes = catchAsyncErrors(async (req, res, next) => {
 
 //Get a Single Hero
 exports.getSingleHero = catchAsyncErrors(async (req, res, next) => {
-  const hero = await Hero.findById(req.params.id).populate("appreciations");
-  //const hero = await Hero.findById(req.params.id);
+  //const hero = await Hero.findById(req.params.id).populate("appreciations");
+  const hero = await Hero.findById(req.params.id);
+
   //if not successful
   if (!hero) {
     return next(new ErrorHandler("Hero not found", 404));
@@ -116,6 +119,7 @@ exports.updateHero = catchAsyncErrors(async (req, res, next) => {
 //Delete Hero
 exports.deleteHero = catchAsyncErrors(async (req, res, next) => {
   const hero = await Hero.findById(req.params.id);
+
   if (!hero) {
     return next(new ErrorHandler("Hero not found", 404));
   }

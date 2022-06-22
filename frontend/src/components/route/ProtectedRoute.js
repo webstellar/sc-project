@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Navigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { loadUser } from "../../actions/userAction";
 
@@ -11,16 +11,17 @@ const ProtectedRoute = ({ children, isAdmin }) => {
   } = useSelector((state) => state.auth);
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (!user) {
       dispatch(loadUser());
     }
-  }, [isAuthenticated, loading]);
+  }, [dispatch, user, isAuthenticated, loading]);
 
   if (!loading && isAuthenticated) {
     if (isAdmin === true && user.role !== "admin") {
-      return <Navigate to="/" />;
+      navigate(-1);
     }
     return children;
   } else {

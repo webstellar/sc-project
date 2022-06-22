@@ -80,7 +80,7 @@ function App() {
         <Route
           path="/dashboard"
           element={
-            <ProtectedRoute isAdmin="admin">
+            <ProtectedRoute isAdmin={true}>
               <Dashboard />
             </ProtectedRoute>
           }
@@ -88,7 +88,7 @@ function App() {
         <Route
           path="/admin/appreciations"
           element={
-            <ProtectedRoute isAdmin="admin">
+            <ProtectedRoute isAdmin={true}>
               <AppreciationsList />
             </ProtectedRoute>
           }
@@ -96,7 +96,7 @@ function App() {
         <Route
           path="/admin/heroes"
           element={
-            <ProtectedRoute isAdmin="admin">
+            <ProtectedRoute isAdmin={true}>
               <HeroesList />
             </ProtectedRoute>
           }
@@ -104,7 +104,7 @@ function App() {
         <Route
           path="/admin/hero"
           element={
-            <ProtectedRoute isAdmin="admin">
+            <ProtectedRoute isAdmin={true}>
               <NewAdminHero />
             </ProtectedRoute>
           }

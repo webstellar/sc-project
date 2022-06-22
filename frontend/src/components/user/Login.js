@@ -32,7 +32,7 @@ const Login = () => {
       toast.error(error);
       dispatch(clearErrors());
     }
-  }, [dispatch, alert, isAuthenticated, error, navigate]);
+  }, [dispatch, isAuthenticated, error, navigate]);
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -101,7 +101,7 @@ const Login = () => {
                       <hr />
                     </div>
 
-                    <div class="d-grid gap-2 mb-3">
+                    <div className="d-grid gap-2 mb-3">
                       <Button className="sc-disablefocus rounded-pill btn-labeled btn-light btn-outline-dark">
                         <img
                           src={Google}
@@ -112,7 +112,7 @@ const Login = () => {
                         sign in with Google
                       </Button>
                     </div>
-                    <div class="d-grid gap-2 mb-3">
+                    <div className="d-grid gap-2 mb-3">
                       <Button className="sc-disablefocus rounded-pill btn-labeled btn-light btn-outline-dark mb-3">
                         <img
                           src={Linkedin}

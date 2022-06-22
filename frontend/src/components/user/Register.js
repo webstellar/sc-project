@@ -147,10 +147,10 @@ const Register = () => {
                         </Form.Label>
                         <Row>
                           <Col sm="2">
-                            <figure class="figure">
+                            <figure className="figure">
                               <img
                                 src={profilePicturePreview}
-                                class="figure-img img-fluid rounded-circle"
+                                className="figure-img img-fluid rounded-circle"
                                 alt="profile preview"
                                 style={{ width: 30, height: 30 }}
                               />

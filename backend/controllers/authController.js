@@ -16,12 +16,7 @@ exports.registerUser = catchAsyncErrors(async (req, res, next) => {
     crop: "scale",
   });
 
-  const { name, email, password, confirmPassword } = req.body;
-
-  //custom code
-  /*   if (req.body.password !== req.body.confirmPassword) {
-    return next(new ErrorHandler("Password does not match", 400));
-  } */
+  const { name, email, password } = req.body;
 
   const user = await User.create({
     name,
@@ -33,15 +28,6 @@ exports.registerUser = catchAsyncErrors(async (req, res, next) => {
     },
   });
 
-  /*   const user = await User.create({
-    name,
-    email,
-    password,
-    profilePicture: {
-      public_id: "social-coin/user_avatar/peter_wzd9i6",
-      url: "https://res.cloudinary.com/dja7mdaul/image/upload/v1655124260/social-coin/user_avatar/peter_wzd9i6.jpg",
-    },
-  }); */
   sendToken(user, 200, res);
 });
 

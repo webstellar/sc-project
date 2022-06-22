@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const countries = require("../data/data");
 
 //Schema for Hero
 const heroSchema = new mongoose.Schema(
@@ -17,25 +18,11 @@ const heroSchema = new mongoose.Schema(
     profilePicture: {
       public_id: {
         type: String,
-        required: true,
+        //required: true,
       },
       url: {
         type: String,
-        required: true,
-      },
-    },
-    gender: {
-      type: String,
-      required: [true, "Please select a gender type for your Hero"],
-      enum: {
-        values: ["Male", "Female", "Others"],
-      },
-    },
-
-    country: {
-      type: String,
-      enum: {
-        values: [],
+        //required: true,
       },
     },
     email: {
@@ -48,6 +35,20 @@ const heroSchema = new mongoose.Schema(
         /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
         "Please fill a valid email address",
       ],
+    },
+    gender: {
+      type: String,
+      enum: {
+        values: ["Male", "Female", "Others"],
+        message: "Please select a gender",
+      },
+    },
+    country: {
+      type: String,
+      enum: {
+        values: countries,
+        message: "Please select a country",
+      },
     },
     appreciationsCount: {
       type: Number,
@@ -102,3 +103,8 @@ const heroSchema = new mongoose.Schema(
 //ability create new url
 
 module.exports = mongoose.model("Hero", heroSchema);
+
+/*
+
+
+     */

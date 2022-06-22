@@ -99,21 +99,24 @@ const HeroesList = () => {
             >
               <BsPencil />
             </Link>
-            <Button
-              className="rounded-pill btn-danger py-1 px-2 ml-2"
-              onClick={deleteHeroHandler(hero._id)}
-            >
-              <BsTrash />
-            </Button>
           </Fragment>
         ),
       });
     });
   };
 
+  /*   
+  
+            <Button
+              className="rounded-pill btn-danger py-1 px-2 ml-2"
+              onClick={deleteHeroHandler(hero._id)}
+            >
+              <BsTrash />
+            </Button>
+            
   const deleteHeroHandler = (id) => {
     dispatch(deleteHero(id));
-  };
+  }; */
 
   return (
     <Fragment>
@@ -124,20 +127,18 @@ const HeroesList = () => {
             <AdminSideBar />
           </Col>
           <Col>
-            <Fragment>
-              <h1 className="my-5">All Heroes</h1>
-              {loading ? (
-                <Loader />
-              ) : (
-                <MDBDataTable
-                  data={setHeroes()}
-                  className="px-3"
-                  bordered
-                  striped
-                  hover
-                />
-              )}
-            </Fragment>
+            <h1 className="my-5">All Heroes</h1>
+            {loading ? (
+              <Loader />
+            ) : (
+              <MDBDataTable
+                data={setHeroes()}
+                className="px-3"
+                bordered
+                striped
+                hover
+              />
+            )}
           </Col>
         </Row>
       </Container>
