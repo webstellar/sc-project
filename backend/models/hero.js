@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-const countries = require("../data/data");
 
 //Schema for Hero
 const heroSchema = new mongoose.Schema(
@@ -13,17 +12,29 @@ const heroSchema = new mongoose.Schema(
     description: {
       type: String,
       required: [true, "Please provide a summary of Hero personality"],
-      maxLength: [500, "Please summary cannot exceed 500 characters"],
+      maxLength: [1000, "Please summary cannot exceed 1000 characters"],
     },
     profilePicture: {
       public_id: {
         type: String,
-        //required: true,
+        required: true,
       },
       url: {
         type: String,
-        //required: true,
+        required: true,
       },
+    },
+    gender: {
+      type: String,
+      required: [true, "Please select a gender type for your Hero"],
+      enum: {
+        values: ["Male", "Female", "Others"],
+        message: "Please select a gender",
+      },
+    },
+    country: {
+      type: String,
+      default: "Nigeria",
     },
     email: {
       type: String,
@@ -36,20 +47,7 @@ const heroSchema = new mongoose.Schema(
         "Please fill a valid email address",
       ],
     },
-    gender: {
-      type: String,
-      enum: {
-        values: ["Male", "Female", "Others"],
-        message: "Please select a gender",
-      },
-    },
-    country: {
-      type: String,
-      enum: {
-        values: countries,
-        message: "Please select a country",
-      },
-    },
+
     appreciationsCount: {
       type: Number,
       default: 0,
@@ -64,25 +62,25 @@ const heroSchema = new mongoose.Schema(
       type: String,
       trim: true,
       lowercase: true,
-      unique: true,
+      unique: false,
     },
     twitterUrl: {
       type: String,
       trim: true,
       lowercase: true,
-      unique: true,
+      unique: false,
     },
     instagramUrl: {
       type: String,
       trim: true,
       lowercase: true,
-      unique: true,
+      unique: false,
     },
     facebookUrl: {
       type: String,
       trim: true,
       lowercase: true,
-      unique: true,
+      unique: false,
     },
     user: {
       type: mongoose.Schema.ObjectId,
@@ -103,8 +101,3 @@ const heroSchema = new mongoose.Schema(
 //ability create new url
 
 module.exports = mongoose.model("Hero", heroSchema);
-
-/*
-
-
-     */

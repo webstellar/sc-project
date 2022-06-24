@@ -17,7 +17,6 @@ const appreciationSchema = new mongoose.Schema(
     hero: {
       type: mongoose.Types.ObjectId,
       ref: "Hero",
-      required: true,
     },
     user: {
       type: mongoose.Schema.ObjectId,
@@ -27,11 +26,9 @@ const appreciationSchema = new mongoose.Schema(
     image: {
       public_id: {
         type: String,
-        required: true,
       },
       url: {
         type: String,
-        required: true,
       },
     },
     audio: {
@@ -50,9 +47,11 @@ const appreciationSchema = new mongoose.Schema(
         type: String,
       },
     },
-    tags: {
-      type: String,
-    },
+    tags: [
+      {
+        type: String,
+      },
+    ],
     likeCount: {
       type: Number,
       default: 0,

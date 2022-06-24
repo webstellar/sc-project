@@ -20,26 +20,20 @@ router
   .post(isAuthenticatedUser, associateHeroAppreciations);
 
 //Users
+router.route("/hero/new").post(isAuthenticatedUser, newHero);
 router
-  .route("/user/hero/new")
-  .post(isAuthenticatedUser, authorizeRoles("user"), newHero);
-router
-  .route("/user/hero/:id")
-  .put(isAuthenticatedUser, authorizeRoles("user"), updateHero)
-  .delete(isAuthenticatedUser, authorizeRoles("user"), deleteHero);
+  .route("/hero/:id")
+  .put(isAuthenticatedUser, updateHero)
+  .delete(isAuthenticatedUser, deleteHero);
 
 // Admin
-router
-  .route("/admin/hero/new")
-  .post(isAuthenticatedUser, authorizeRoles("admin"), newHero);
+router.route("/hero/new").post(isAuthenticatedUser, newHero);
+
+router.route("/admin/heroes").get(getAdminHeroes);
 
 router
-  .route("/admin/heroes")
-  .get(isAuthenticatedUser, authorizeRoles("admin"), getAdminHeroes);
-
-router
-  .route("/admin/hero/:id")
-  .put(isAuthenticatedUser, authorizeRoles("admin"), updateHero)
-  .delete(isAuthenticatedUser, authorizeRoles("admin"), deleteHero);
+  .route("/hero/:id")
+  .put(isAuthenticatedUser, updateHero)
+  .delete(isAuthenticatedUser, deleteHero);
 
 module.exports = router;

@@ -10,7 +10,7 @@ const HeroAppreciationLink = ({ heroes }) => {
     <Fragment>
       <ListGroup.Item
         as={Link}
-        to={`/appreciation/${appr._id}`}
+        to={`/appreciation/${appr?._id}`}
         className="sc-sidedarlink mb-1"
       >
         <Navbar className="justify-content-start">
@@ -27,7 +27,7 @@ const HeroAppreciationLink = ({ heroes }) => {
             </span>
           </Navbar.Brand>
         </Navbar>
-        {appr.summary}
+        {appr?.summary}
       </ListGroup.Item>
     </Fragment>
   );

@@ -54,7 +54,7 @@ const HeroDetails = () => {
                     className="mb-lg-5"
                   >
                     <Tab eventKey="home" title="Home" className="sc-tab">
-                      {hero.appreciations ? (
+                      {hero?.appreciations ? (
                         <Fragment>
                           {hero.appreciations.map((appreciation, i) => (
                             <Appreciation key={i} appreciation={appreciation} />

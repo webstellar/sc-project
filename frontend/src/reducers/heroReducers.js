@@ -39,7 +39,7 @@ export const heroesReducer = (state = { heroes: [] }, action) => {
       return {
         loading: false,
         heroes: action.payload.heroes,
-        resPerPage: action.payload.resPerPage,
+        //resPerPage: action.payload.resPerPage,
         heroesCount: action.payload.heroesCount,
       };
 

@@ -3,24 +3,15 @@ const Appreciation = require("../models/appreciation");
 const ErrorHandler = require("../utils/errorHandler");
 const catchAsyncErrors = require("../middlewares/catchAsyncErrors");
 const APIFeatures = require("../utils/apiFeatures");
+const cloudinary = require("cloudinary");
 
 //create new appreciation => /api/v1/appreciation/new
 exports.newAppreciation = catchAsyncErrors(async (req, res, next) => {
   const image = await cloudinary.v2.uploader.upload(req.body.image, {
     folder: "social-coin/appreciations/images",
-    width: 240,
-    crop: "scale",
-  });
-  const audio = await cloudinary.v2.uploader.upload(req.body.audio, {
-    folder: "social-coin/appreciations/audios",
-  });
-  const video = await cloudinary.v2.uploader.upload(req.body.video, {
-    folder: "social-coin/appreciations/images",
   });
 
   req.body.image = image;
-  req.body.audio = audio;
-  req.body.video = video;
 
   req.body.user = req.user.id;
   const appreciation = await Appreciation.create(req.body);
@@ -107,19 +98,12 @@ exports.deleteAppreciation = catchAsyncErrors(async (req, res, next) => {
     return next(new ErrorHandler("Appreciation not found", 404));
   }
 
-  //Deleting images, audio and video associated with the appreciation
-
-  const imageResult = await cloudinary.v2.uploader.destroy(
-    appreciation.image.public_id
-  );
-
-  const audioResult = await cloudinary.v2.uploader.destroy(
-    appreciation.audio.public_id
-  );
-
-  const videoResult = await cloudinary.v2.uploader.destroy(
-    appreciation.video.public_id
-  );
+  //Deleting images associated with the appreciation
+  for (let i = 0; i < appreciation.images.length; i++) {
+    const imageResult = await cloudinary.v2.uploader.destroy(
+      appreciation.image.public_id
+    );
+  }
 
   await appreciation.deleteOne();
   res.status(200).json({

@@ -14,10 +14,7 @@ exports.newHero = catchAsyncErrors(async (req, res, next) => {
     crop: "scale",
   });
 
-  req.body.profilePicture.public_id = result.public_id;
-
-  req.body.profilePicture.url = result.secure_url;
-
+  req.body.profilePicture = result;
   req.body.user = req.user.id;
 
   const hero = await Hero.create(req.body);
@@ -33,7 +30,9 @@ exports.getHeroes = catchAsyncErrors(async (req, res, next) => {
   const resPerPage = 8;
   const heroesCount = await Hero.countDocuments();
 
-  const apiFeatures = new APIFeatures(
+  //const apiFeatures = new APIFeatures(Hero.find(), req.query).search();
+
+  apiFeatures = new APIFeatures(
     Hero.find().populate("appreciations"),
     req.query
   ).search();
@@ -50,8 +49,8 @@ exports.getHeroes = catchAsyncErrors(async (req, res, next) => {
 
 //Get All Heroes => /api/v1/admin/heroes
 exports.getAdminHeroes = catchAsyncErrors(async (req, res, next) => {
-  //const heroes = await Hero.find().populate("appreciations");
-  const heroes = await Hero.find();
+  const heroes = await Hero.find().populate("appreciations");
+  //const heroes = await Hero.find();
 
   res.status(200).json({
     success: true,
@@ -61,8 +60,8 @@ exports.getAdminHeroes = catchAsyncErrors(async (req, res, next) => {
 
 //Get a Single Hero
 exports.getSingleHero = catchAsyncErrors(async (req, res, next) => {
-  //const hero = await Hero.findById(req.params.id).populate("appreciations");
-  const hero = await Hero.findById(req.params.id);
+  const hero = await Hero.findById(req.params.id).populate("appreciations");
+  //const hero = await Hero.findById(req.params.id);
 
   //if not successful
   if (!hero) {
@@ -125,7 +124,6 @@ exports.deleteHero = catchAsyncErrors(async (req, res, next) => {
   }
 
   await hero.deleteOne();
-
   res.status(200).json({
     success: true,
     message: "Hero successfully deleted",

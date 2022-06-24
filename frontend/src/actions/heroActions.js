@@ -28,23 +28,25 @@ import {
 } from "../constants/heroConstant";
 
 //Get all the heroes from the backend
-export const getHeroes = (keyword = "") => async (dispatch) => {
-  try {
-    dispatch({ type: ALL_HEROES_REQUEST });
+export const getHeroes =
+  (keyword = "") =>
+  async (dispatch) => {
+    try {
+      dispatch({ type: ALL_HEROES_REQUEST });
 
-    const { data } = await axios.get(`/api/v1/heroes?keyword=${keyword}`);
+      const { data } = await axios.get(`/api/v1/heroes?keyword=${keyword}`);
 
-    dispatch({
-      type: ALL_HEROES_SUCCESS,
-      payload: data,
-    });
-  } catch (error) {
-    dispatch({
-      type: ALL_HEROES_FAIL,
-      payload: error.response.data.message,
-    });
-  }
-};
+      dispatch({
+        type: ALL_HEROES_SUCCESS,
+        payload: data,
+      });
+    } catch (error) {
+      dispatch({
+        type: ALL_HEROES_FAIL,
+        payload: error.response.data.message,
+      });
+    }
+  };
 
 //Get A single hero detail from the backend
 //use id as a parameter since dealing with one
@@ -95,11 +97,7 @@ export const newHero = (heroData) => async (dispatch) => {
       },
     };
 
-    const { data } = await axios.post(
-      `/api/v1/admin/hero/new`,
-      heroData,
-      config
-    );
+    const { data } = await axios.post(`/api/v1/hero/new`, heroData, config);
 
     dispatch({
       type: NEW_HERO_SUCCESS,
@@ -113,12 +111,37 @@ export const newHero = (heroData) => async (dispatch) => {
   }
 };
 
+//newHeroAppreciation
+/*
+export const newHeroAppreciation =
+  (heroid, appreciationid) => async (dispatch) => {
+    try {
+      dispatch({ type: NEW_HERO_APPRECIATION_REQUEST });
+
+      const { hero } = await axios.get(`/api/v1/hero/${heroid}`);
+      const { appreciation } = await axios.get(
+        `/api/v1/appreciation/${appreciationid}`
+      );
+
+      dispatch({
+        type: NEW_HERO_APPRECIATION_SUCCESS,
+        payload: hero._id && appreciation._id,
+      });
+    } catch (error) {
+      dispatch({
+        type: NEW_HERO_APPRECIATION_FAIL,
+        payload: error.response.data.message,
+      });
+    }
+  };
+  */
+
 // Delete Hero (Admin)
 export const deleteHero = (id) => async (dispatch) => {
   try {
     dispatch({ type: DELETE_HERO_REQUEST });
 
-    const { data } = await axios.delete(`/api/v1/admin/hero/${id}`);
+    const { data } = await axios.delete(`/api/v1/hero/${id}`);
 
     dispatch({
       type: DELETE_HERO_SUCCESS,
@@ -143,11 +166,7 @@ export const updateHero = (id, heroData) => async (dispatch) => {
       },
     };
 
-    const { data } = await axios.put(
-      `/api/v1/admin/hero/${id}`,
-      heroData,
-      config
-    );
+    const { data } = await axios.put(`/api/v1/hero/${id}`, heroData, config);
 
     dispatch({
       type: UPDATE_HERO_SUCCESS,
@@ -184,83 +203,6 @@ export const getUserHeroes = () => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: ADMIN_HEROES_FAIL,
-      payload: error.response.data.message,
-    });
-  }
-};
-
-//New User Hero
-export const newUserHero = (heroData) => async (dispatch) => {
-  try {
-    dispatch({ type: NEW_HERO_REQUEST });
-
-    const config = {
-      headers: {
-        "Content-Type": "application/json",
-      },
-    };
-
-    const { data } = await axios.post(
-      `/api/v1/user/hero/new`,
-      heroData,
-      config
-    );
-
-    dispatch({
-      type: NEW_HERO_SUCCESS,
-      payload: data,
-    });
-  } catch (error) {
-    dispatch({
-      type: NEW_HERO_FAIL,
-      payload: error.response.data.message,
-    });
-  }
-};
-
-// Delete Hero (Admin)
-export const deleteUserHero = (id) => async (dispatch) => {
-  try {
-    dispatch({ type: DELETE_HERO_REQUEST });
-
-    const { data } = await axios.delete(`/api/v1/user/hero/${id}`);
-
-    dispatch({
-      type: DELETE_HERO_SUCCESS,
-      payload: data.success,
-    });
-  } catch (error) {
-    dispatch({
-      type: DELETE_HERO_FAIL,
-      payload: error.response.data.message,
-    });
-  }
-};
-
-// Update Hero (ADMIN)
-export const updateUserHero = (id, heroData) => async (dispatch) => {
-  try {
-    dispatch({ type: UPDATE_HERO_REQUEST });
-
-    const config = {
-      headers: {
-        "Content-Type": "application/json",
-      },
-    };
-
-    const { data } = await axios.put(
-      `/api/v1/user/hero/${id}`,
-      heroData,
-      config
-    );
-
-    dispatch({
-      type: UPDATE_HERO_SUCCESS,
-      payload: data.success,
-    });
-  } catch (error) {
-    dispatch({
-      type: UPDATE_HERO_FAIL,
       payload: error.response.data.message,
     });
   }

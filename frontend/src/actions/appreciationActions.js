@@ -14,15 +14,12 @@ import {
   USER_APPRECIATIONS_FAIL,
   NEW_APPRECIATION_REQUEST,
   NEW_APPRECIATION_SUCCESS,
-  NEW_APPRECIATION_RESET,
   NEW_APPRECIATION_FAIL,
   DELETE_APPRECIATION_REQUEST,
   DELETE_APPRECIATION_SUCCESS,
-  DELETE_APPRECIATION_RESET,
   DELETE_APPRECIATION_FAIL,
   UPDATE_APPRECIATION_REQUEST,
   UPDATE_APPRECIATION_SUCCESS,
-  UPDATE_APPRECIATION_RESET,
   UPDATE_APPRECIATION_FAIL,
   CLEAR_ERRORS,
 } from "../constants/appreciationConstant";
@@ -96,7 +93,7 @@ export const newAppreciation = (appreciationData) => async (dispatch) => {
     };
 
     const { data } = await axios.post(
-      `/api/v1/admin/appreciation/new`,
+      `/api/v1/appreciation/new`,
       appreciationData,
       config
     );
@@ -118,7 +115,7 @@ export const deleteAppreciation = (id) => async (dispatch) => {
   try {
     dispatch({ type: DELETE_APPRECIATION_REQUEST });
 
-    const { data } = await axios.delete(`/api/v1/admin/appreciation/${id}`);
+    const { data } = await axios.delete(`/api/v1/appreciation/${id}`);
 
     dispatch({
       type: DELETE_APPRECIATION_SUCCESS,
@@ -133,141 +130,38 @@ export const deleteAppreciation = (id) => async (dispatch) => {
 };
 
 // Update Appreciation (ADMIN)
-export const updateAppreciation = (id, appreciationData) => async (
-  dispatch
-) => {
-  try {
-    dispatch({ type: UPDATE_APPRECIATION_REQUEST });
+export const updateAppreciation =
+  (id, appreciationData) => async (dispatch) => {
+    try {
+      dispatch({ type: UPDATE_APPRECIATION_REQUEST });
 
-    const config = {
-      headers: {
-        "Content-Type": "application/json",
-      },
-    };
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      };
 
-    const { data } = await axios.put(
-      `/api/v1/admin/appreciation/${id}`,
-      appreciationData,
-      config
-    );
+      const { data } = await axios.put(
+        `/api/v1/appreciation/${id}`,
+        appreciationData,
+        config
+      );
 
-    dispatch({
-      type: UPDATE_APPRECIATION_SUCCESS,
-      payload: data.success,
-    });
-  } catch (error) {
-    dispatch({
-      type: UPDATE_APPRECIATION_FAIL,
-      payload: error.response.data.message,
-    });
-  }
-};
+      dispatch({
+        type: UPDATE_APPRECIATION_SUCCESS,
+        payload: data.success,
+      });
+    } catch (error) {
+      dispatch({
+        type: UPDATE_APPRECIATION_FAIL,
+        payload: error.response.data.message,
+      });
+    }
+  };
 
 //clear errors
 export const clearErrors = () => async (dispatch) => {
   dispatch({
     type: CLEAR_ERRORS,
   });
-};
-
-//USER
-
-//Get All Users
-export const getUserAppreciations = () => async (dispatch) => {
-  try {
-    dispatch({ type: ADMIN_APPRECIATIONS_REQUEST });
-
-    const { data } = await axios.get("/api/v1/user/appreciations");
-
-    dispatch({
-      type: ADMIN_APPRECIATIONS_SUCCESS,
-      payload: data.appreciations,
-    });
-  } catch (error) {
-    dispatch({
-      type: ADMIN_APPRECIATIONS_FAIL,
-      payload: error.response.data.message,
-    });
-  }
-};
-
-//New User Appreciation
-export const newUserAppreciation = (appreciationData) => async (dispatch) => {
-  try {
-    dispatch({ type: NEW_APPRECIATION_REQUEST });
-
-    const config = {
-      headers: {
-        "Content-Type": "application/json",
-      },
-    };
-
-    const { data } = await axios.post(
-      `/api/v1/user/appreciation/new`,
-      appreciationData,
-      config
-    );
-
-    dispatch({
-      type: NEW_APPRECIATION_SUCCESS,
-      payload: data,
-    });
-  } catch (error) {
-    dispatch({
-      type: NEW_APPRECIATION_FAIL,
-      payload: error.response.data.message,
-    });
-  }
-};
-
-// Delete appreciation (Admin) -- still needs working
-export const deleteUserAppreciation = (id, appreciationId) => async (
-  dispatch
-) => {
-  try {
-    dispatch({ type: DELETE_APPRECIATION_REQUEST });
-
-    const { data } = await axios.delete(`/api/v1/user/appreciation/${id}`);
-
-    dispatch({
-      type: DELETE_APPRECIATION_SUCCESS,
-      payload: data.success,
-    });
-  } catch (error) {
-    dispatch({
-      type: DELETE_APPRECIATION_FAIL,
-      payload: error.response.data.message,
-    });
-  }
-};
-
-// Update Appreciation (User) --- still needs working
-export const updateUserAppreciation = (id, appreciationData) => async (
-  dispatch
-) => {
-  try {
-    dispatch({ type: UPDATE_APPRECIATION_REQUEST });
-
-    const config = {
-      headers: {
-        "Content-Type": "application/json",
-      },
-    };
-
-    const { data } = await axios.put(
-      `/api/v1/user/appreciation/${id}`,
-      appreciationData,
-      config
-    );
-
-    dispatch({
-      type: UPDATE_APPRECIATION_SUCCESS,
-      payload: data.success,
-    });
-  } catch (error) {
-    dispatch({
-      type: UPDATE_APPRECIATION_FAIL,
-      payload: error.response.data.message,
-    });
-  }
 };

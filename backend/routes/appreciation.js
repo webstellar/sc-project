@@ -10,34 +10,27 @@ const {
   deleteAppreciation,
   getAdminAppreciations,
 } = require("../controllers/appreciationControllers");
-const { isAuthenticatedUser, authorizeRoles } = require("../middlewares/auth");
+const { isAuthenticatedUser } = require("../middlewares/auth");
 
 router.route("/appreciations").get(getAppreciations);
-
 router.route("/appreciation/:id").get(getSingleAppreciation);
 
 //users
-router
-  .route("/user/appreciation/new")
-  .post(isAuthenticatedUser, authorizeRoles("user"), newAppreciation);
+router.route("/appreciation/new").post(isAuthenticatedUser, newAppreciation);
 
 router
-  .route("/user/appreciation/:id")
-  .put(isAuthenticatedUser, authorizeRoles("user"), updateAppreciation)
-  .delete(isAuthenticatedUser, authorizeRoles("user"), deleteAppreciation);
+  .route("/appreciation/:id")
+  .put(isAuthenticatedUser, updateAppreciation)
+  .delete(isAuthenticatedUser, deleteAppreciation);
 
 //Admin
-router
-  .route("/admin/appreciation/new")
-  .post(isAuthenticatedUser, authorizeRoles("admin"), newAppreciation);
+router.route("/appreciation/new").post(isAuthenticatedUser, newAppreciation);
+
+router.route("/admin/appreciations").get(getAdminAppreciations);
 
 router
-  .route("/admin/appreciations")
-  .get(isAuthenticatedUser, authorizeRoles("admin"), getAdminAppreciations);
-
-router
-  .route("/admin/appreciation/:id")
-  .put(isAuthenticatedUser, authorizeRoles("admin"), updateAppreciation)
-  .delete(isAuthenticatedUser, authorizeRoles("admin"), deleteAppreciation);
+  .route("/appreciation/:id")
+  .put(isAuthenticatedUser, updateAppreciation)
+  .delete(isAuthenticatedUser, deleteAppreciation);
 
 module.exports = router;

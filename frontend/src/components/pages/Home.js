@@ -13,7 +13,6 @@ import { ToastContainer, toast } from "react-toastify";
 const Home = () => {
   const dispatch = useDispatch();
   const params = useParams();
-  const alert = toast();
 
   const { loading, heroes, error, heroesCount } = useSelector(
     (state) => state.heroes
@@ -23,11 +22,11 @@ const Home = () => {
 
   useEffect(() => {
     if (error) {
-      return alert.error(error);
+      return toast.error(error);
     }
 
     dispatch(getHeroes(keyword));
-  }, [dispatch, keyword, alert, error]);
+  }, [dispatch, keyword, error]);
 
   return (
     <Fragment>

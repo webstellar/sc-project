@@ -28,6 +28,7 @@ import Dashboard from "./components/admin/Dashboard";
 import HeroesList from "./components/admin/HeroesList";
 import AppreciationsList from "./components/admin/AppreciationsList";
 import NewAdminHero from "./components/admin/NewAdminHero";
+import NewAdminAppreciation from "./components/admin/NewAdminAppreciation";
 
 import { loadUser } from "./actions/userAction";
 import store from "./store";
@@ -98,6 +99,14 @@ function App() {
           element={
             <ProtectedRoute isAdmin={true}>
               <HeroesList />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/admin/appreciation"
+          element={
+            <ProtectedRoute isAdmin={true}>
+              <NewAdminAppreciation />
             </ProtectedRoute>
           }
         />

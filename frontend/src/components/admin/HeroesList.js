@@ -90,7 +90,7 @@ const HeroesList = () => {
         gender: hero.gender,
         country: hero.country,
         email: hero.email,
-        appreciationsCount: hero.appreciationsCount,
+        appreciationsCount: hero.appreciations.Length,
         actions: (
           <Fragment>
             <Link
@@ -99,6 +99,9 @@ const HeroesList = () => {
             >
               <BsPencil />
             </Link>
+            <Button className="rounded-pill btn-danger py-1 px-2 ml-2">
+              <BsTrash />
+            </Button>
           </Fragment>
         ),
       });
@@ -106,7 +109,7 @@ const HeroesList = () => {
   };
 
   /*   
-  
+  onClick={deleteHeroHandler(hero._id)}
             <Button
               className="rounded-pill btn-danger py-1 px-2 ml-2"
               onClick={deleteHeroHandler(hero._id)}

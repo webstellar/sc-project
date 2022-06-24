@@ -37,7 +37,7 @@ const Hero = ({ hero }) => {
                 </Col>
               </Row>
             </Card.Body>
-            <div className="p-3 text-center card-bg-color">{appr.summary}</div>
+            <div className="p-3 text-center card-bg-color">{appr?.summary}</div>
           </Card.ImgOverlay>
         </Card>
       </Col>
