@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { updateProfile, loadUser, clearErrors } from "../../actions/userAction";
 import { useNavigate } from "react-router-dom";
 import { UPDATE_PROFILE_RESET } from "../../constants/userConstant";
+import { toast } from "react-toastify";
 
 const UpdateProfile = () => {
   const [name, setName] = useState("");
@@ -30,12 +31,12 @@ const UpdateProfile = () => {
     }
 
     if (error) {
-      alert.error(error);
+      toast.error(error);
       dispatch(clearErrors());
     }
 
     if (isUpdated) {
-      alert.success("User updated successfully");
+      toast.success("User updated successfully");
       dispatch(loadUser());
 
       navigate("/me");
@@ -44,7 +45,7 @@ const UpdateProfile = () => {
         type: UPDATE_PROFILE_RESET,
       });
     }
-  }, [dispatch, alert, error, user, navigate, isUpdated]);
+  }, [dispatch, error, user, navigate, isUpdated]);
 
   const submitHandler = (e) => {
     e.preventDefault();

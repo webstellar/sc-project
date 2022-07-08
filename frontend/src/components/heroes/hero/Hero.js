@@ -10,11 +10,11 @@ const Hero = ({ hero }) => {
     <Fragment>
       <Col as={Link} to={`/hero/${hero._id}`}>
         <Card
-          className="bg-dark text-white"
+          className="bg-dark text-white mb-4 pr-3"
           style={{
-            width: "15rem",
-            height: "20rem",
-            borderRadius: "10px",
+            width: "10rem",
+            height: "15rem",
+            borderRadius: "8px",
           }}
         >
           <Card.Img
@@ -28,12 +28,14 @@ const Hero = ({ hero }) => {
           />
           <Card.ImgOverlay>
             <Card.Body>
-              <Row className="d-flex justify-content-end">
-                <Col sm={3} className="hero-count">
-                  <span>
-                    <MdMessage />
-                  </span>
-                  <span className="ps-1">{hero.appreciationsCount}</span>
+              <Row>
+                <Col className="d-flex justify-content-end hero-count ">
+                  <div style={{ backgroundColor: "#fff" }}>
+                    <span>
+                      <MdMessage />
+                    </span>
+                    <span className="ps-1">{hero.appreciationsCount}</span>
+                  </div>
                 </Col>
               </Row>
             </Card.Body>

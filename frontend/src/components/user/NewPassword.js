@@ -6,6 +6,7 @@ import { Container, Row, Col, Form, Button } from "react-bootstrap";
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { resetPassword, clearErrors } from "../../actions/userAction";
+import { ToastContainer, toast } from "react-toastify";
 
 const NewPassword = () => {
   const [password, setPassword] = useState("");
@@ -19,15 +20,15 @@ const NewPassword = () => {
 
   useEffect(() => {
     if (error) {
-      alert.error(error);
+      toast.error(error);
       dispatch(clearErrors());
     }
 
     if (success) {
-      alert.success("Password updated successfully");
+      toast.success("Password updated successfully");
       navigate("/login");
     }
-  }, [dispatch, alert, error, success, navigate]);
+  }, [dispatch, error, success, navigate]);
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -83,6 +84,17 @@ const NewPassword = () => {
               </div>
             </Col>
           </Row>
+          <ToastContainer
+            position="bottom-left"
+            autoClose={5000}
+            hideProgressBar={true}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+          />
         </Container>
       </ErrorBoundary>
     </Fragment>

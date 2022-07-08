@@ -13,17 +13,16 @@ import { toast } from "react-toastify";
 
 const ProfileTab = ({ user }) => {
   const dispatch = useDispatch();
-  const alert = toast();
 
   const { heroes, error } = useSelector((state) => state.heroes);
 
   useEffect(() => {
     dispatch(getHeroes());
-  }, [dispatch, alert, error]);
+  }, [dispatch, error]);
 
   const logoutHandler = () => {
     dispatch(logout());
-    alert.success("Logged out successfully.");
+    toast.success("Logged out successfully.");
   };
   return (
     <Fragment>

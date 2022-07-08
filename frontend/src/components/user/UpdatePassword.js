@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { updatePassword, clearErrors } from "../../actions/userAction";
 import { useNavigate } from "react-router-dom";
 import { UPDATE_PASSWORD_RESET } from "../../constants/userConstant";
+import { toast } from "react-toastify";
 
 const UpdatePassword = () => {
   const [oldPassword, setOldPassword] = useState("");
@@ -19,12 +20,12 @@ const UpdatePassword = () => {
 
   useEffect(() => {
     if (error) {
-      alert.error(error);
+      toast.error(error);
       dispatch(clearErrors());
     }
 
     if (isUpdated) {
-      alert.success("Password updated successfully");
+      toast.success("Password updated successfully");
 
       navigate("/me");
 
@@ -32,7 +33,7 @@ const UpdatePassword = () => {
         type: UPDATE_PASSWORD_RESET,
       });
     }
-  }, [dispatch, alert, error, navigate, isUpdated]);
+  }, [dispatch, error, navigate, isUpdated]);
 
   const submitHandler = (e) => {
     e.preventDefault();

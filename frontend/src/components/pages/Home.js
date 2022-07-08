@@ -36,7 +36,7 @@ const Home = () => {
         <Fragment>
           <MetaData title={"Hero appreciation app"} />
           <Container>
-            <Row md={4}>
+            <Row sm={3} md={6}>
               <ErrorBoundary>
                 {heroes &&
                   heroes.map((hero) => <Hero key={hero._id} hero={hero} />)}

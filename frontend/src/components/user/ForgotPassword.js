@@ -6,10 +6,10 @@ import ErrorBoundary from "../../ErrorBoundary";
 import { Container, Row, Col, Form, Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { forgotPassword, clearErrors } from "../../actions/userAction";
+import { ToastContainer, toast } from "react-toastify";
 
 const ForgotPassword = () => {
   const [email, setEmail] = useState("");
-
 
   const dispatch = useDispatch();
 
@@ -19,14 +19,14 @@ const ForgotPassword = () => {
 
   useEffect(() => {
     if (error) {
-      alert.error(error);
+      toast.error(error);
       dispatch(clearErrors());
     }
 
     if (message) {
-      alert.success(message);
+      toast.success(message);
     }
-  }, [dispatch, alert, error, message]);
+  }, [dispatch, error, message]);
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -78,6 +78,17 @@ const ForgotPassword = () => {
                   </div>
                 </Col>
               </Row>
+              <ToastContainer
+                position="bottom-left"
+                autoClose={5000}
+                hideProgressBar={true}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+              />
             </Container>
           </ErrorBoundary>
         </Fragment>

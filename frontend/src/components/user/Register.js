@@ -29,7 +29,6 @@ const Register = () => {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const alert = toast();
 
   const { isAuthenticated, error, loading } = useSelector(
     (state) => state.auth
@@ -41,10 +40,10 @@ const Register = () => {
     }
 
     if (error) {
-      alert.error(error);
+      toast.error(error);
       dispatch(clearErrors());
     }
-  }, [dispatch, alert, isAuthenticated, error, navigate]);
+  }, [dispatch, isAuthenticated, error, navigate]);
 
   const submitHandler = (e) => {
     e.preventDefault();

@@ -42,16 +42,22 @@
 
 /* Hero and Appreciation Styling*/
 .hero-count {
+  margin-top: -1rem !important;
+}
+
+.hero-count div {
   color: #000 !important;
   background-color: #fff !important;
-  border-radius: 10px !important;
-  font-size: 13px;
+  border-radius: 5px !important;
+  font-size: 10px;
+  text-align: right !important;
+  padding: 2px 4px 2px 4px !important;
+  margin-right: -0.7rem !important;
 }
 
 .card-bg-color {
   margin-top: 5rem;
-  height: 9rem;
-  align-self: center;
+  height: 6rem;
   background: rgba(0, 0, 0, 0.7);
 }
 
@@ -244,4 +250,3 @@ h6 span {
   border-radius: 5px !important;
   margin-bottom: 1rem !important;
 }
-

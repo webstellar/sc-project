@@ -99,11 +99,10 @@ exports.deleteAppreciation = catchAsyncErrors(async (req, res, next) => {
   }
 
   //Deleting images associated with the appreciation
-  for (let i = 0; i < appreciation.images.length; i++) {
-    const imageResult = await cloudinary.v2.uploader.destroy(
-      appreciation.image.public_id
-    );
-  }
+
+  const imageResult = await cloudinary.v2.uploader.destroy(
+    appreciation.image.public_id
+  );
 
   await appreciation.deleteOne();
   res.status(200).json({
